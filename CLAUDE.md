@@ -27,9 +27,11 @@ O dono do projeto conhece bem PHP e Laravel e menos JavaScript/TypeScript. Ao ex
 npm run dev              # servidor local
 npm run test             # Vitest
 npm run lint && npm run typecheck
-npx supabase start       # Supabase local (Docker)
-npx supabase db reset    # recria o banco local a partir das migrations
-npx supabase gen types typescript --local --schema public > lib/supabase/database.types.ts
+npm run db:start         # Supabase local (Docker), sem reinício automático dos contêineres
+npm run db:stop          # desliga o Supabase local
+npx supabase migration up  # aplica migrations novas sem apagar dados
+npm run db:reset         # recria o banco local a partir das migrations (apaga dados)
+npm run db:types         # regera lib/supabase/database.types.ts
 ```
 
 ## Estrutura

@@ -14,20 +14,23 @@ Precisa de Node 20+ e Docker (para o Supabase local).
 
 ```bash
 npm install
-npx supabase start          # sobe Postgres, Auth e o Mailpit (caixa de e-mails de teste)
-cp .env.example .env.local  # preencha com a URL e a chave publicável de `npx supabase status`
+npm run db:start            # sobe Postgres, Auth, Studio e o Mailpit (caixa de e-mails de teste)
+cp .env.example .env.local  # preencha com a URL e a chave publicável mostradas pelo comando acima
 npm run dev                 # http://localhost:3000
 ```
 
-Os e-mails de confirmação e de nova senha não saem para a internet: abra http://127.0.0.1:54324 (Mailpit) para vê-los.
+Os e-mails de confirmação e de nova senha não saem para a internet: abra http://127.0.0.1:54324 (Mailpit) para vê-los. O banco pode ser consultado no Studio, em http://127.0.0.1:54323.
+
+O Docker não fica com o Supabase ligado o tempo todo: os contêineres só sobem com `npm run db:start` e ficam no ar até `npm run db:stop` (não voltam sozinhos quando o Docker abre).
 
 | Comando | Para quê |
 | --- | --- |
 | `npm run test` | Testes (Vitest) |
 | `npm run lint` / `npm run typecheck` | ESLint e TypeScript |
-| `npx supabase db reset` | Recria o banco local a partir das migrations |
-| `npx supabase gen types typescript --local --schema public > lib/supabase/database.types.ts` | Regera os tipos do banco |
-| `npx supabase stop` | Desliga o Supabase local |
+| `npm run db:start` / `npm run db:stop` | Sobe e desliga o Supabase local. Os contêineres não reiniciam sozinhos |
+| `npx supabase migration up` | Aplica migrations novas sem apagar os dados |
+| `npm run db:reset` | Recria o banco local do zero a partir das migrations (apaga os dados) |
+| `npm run db:types` | Regera `lib/supabase/database.types.ts` |
 
 ## Publicar (Supabase + Vercel)
 

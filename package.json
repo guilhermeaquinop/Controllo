@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "db:start": "node scripts/db-start.mjs",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset && node scripts/sem-reinicio.mjs",
+    "db:types": "supabase gen types typescript --local --schema public > lib/supabase/database.types.ts"
   },
   "dependencies": {
     "@date-fns/tz": "^1.5.0",

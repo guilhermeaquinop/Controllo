@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Economia</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0a0a0a}a:hover{color:#404040}
+button:focus-visible,a:focus-visible{outline:2px solid #0a0a0a;outline-offset:2px}
+.box{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:14px;border:1px solid #e5e5e5;background:#ffffff;text-align:left;font:inherit;color:#0a0a0a;cursor:pointer;width:100%;box-sizing:border-box}
+.box.on{border:2px solid #0a0a0a;padding:15px}
+.track{height:8px;border-radius:999px;background:#ececec;overflow:hidden}
+.fill{height:100%;border-radius:999px;background:#0a0a0a}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:0 12px;align-items:center;padding:12px 0;border-bottom:1px solid #efefef}
+.row:last-child{border-bottom:0}
+.ico{width:32px;height:32px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+.ico.in{background:#dcfce7;color:#15803d}.ico.out{background:#fee2e2;color:#dc2626}
+.v-in{color:#15803d;font-weight:700;white-space:nowrap}.v-out{color:#dc2626;font-weight:700;white-space:nowrap}
+.bar{width:100%;border-radius:4px 4px 0 0;background:#c8c8c8}
+.bar.cur{background:#0a0a0a}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#6b6b6b;font-size:12px;font-weight:500}
+.tab .ind{width:56px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+.tab.on{color:#0a0a0a;font-weight:600}
+.tab.on .ind{background:#ebebeb}
+.ibtn{width:44px;height:44px;border:0;background:transparent;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0a0a0a;cursor:pointer;text-decoration:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 1240px; box-sizing: border-box; background: #f5f5f5; color: #0a0a0a; font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.5; font-variant-numeric: tabular-nums; display: flex; flex-direction: column;">
+
+  <header style="height: 56px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 4px 0 16px; background: #ffffff; border-bottom: 1px solid #e5e5e5;">
+    <span style="font-size: 18px; font-weight: 700;">Economia</span>
+    <div style="display: flex;">
+      <button type="button" class="ibtn" aria-label="Ocultar valores"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+      <a href="Ajustes.dc.html" class="ibtn" aria-label="Ajustes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"></path></svg></a>
+    </div>
+  </header>
+
+  <main style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px 16px 24px;">
+    <section aria-label="Total guardado" style="background: #0a0a0a; color: #ffffff; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 13px; color: #bdbdbd;">Total guardado</span>
+        <span style="font-size: 34px; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em;">R$ 22.850,00</span>
+        <span style="font-size: 12px; color: #bdbdbd;">em 3 reservas · até 15/10</span>
+      </div>
+      <div style="display: flex; align-items: flex-end; gap: 6px; height: 64px;" role="img" aria-label="Total guardado mês a mês em 2026, de R$ 15.200 em janeiro a R$ 22.850 em outubro">
+        <sc-for list="{{bars}}" as="b" hint-placeholder-count="10">
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end;">
+            <div style="width: 100%; border-radius: 4px 4px 0 0; background: {{b.color}}; height: {{b.h}};"></div>
+            <span style="font-size: 10px; color: #bdbdbd;">{{b.m}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding-top: 14px; border-top: 1px solid #2e2e2e;">
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: #bdbdbd;">Entrou</span><span style="font-weight: 700; color: #4ade80;">+ 1.800,00</span></div>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: #bdbdbd;">Saiu</span><span style="font-weight: 700; color: #f87171;">− 450,00</span></div>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: #bdbdbd;">Em outubro</span><span style="font-weight: 700;">+ 1.350,00</span></div>
+      </div>
+    </section>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+      <h2 style="margin: 0; font-size: 16px; font-weight: 600;">Reservas</h2>
+      <button type="button" style="height: 40px; padding: 0 14px; border: 1px solid #0a0a0a; border-radius: 999px; background: #ffffff; color: #0a0a0a; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nova reserva</button>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <sc-for list="{{boxes}}" as="b" hint-placeholder-count="3">
+        <button type="button" class="{{b.cls}}" aria-pressed="{{b.on}}" onClick="{{b.pick}}">
+          <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; width: 100%;">
+            <span style="font-weight: 700;">{{b.nome}}</span>
+            <span style="font-size: 18px; font-weight: 700;">{{b.saldo}}</span>
+          </span>
+          <sc-if value="{{b.temMeta}}" hint-placeholder-val="{{true}}">
+            <span style="display: flex; flex-direction: column; gap: 6px; width: 100%;">
+              <span class="track"><span class="fill" style="display: block; width: {{b.pct}};"></span></span>
+              <span style="font-size: 12px; color: #6b6b6b;">{{b.metaTxt}}</span>
+            </span>
+          </sc-if>
+          <span style="display: flex; gap: 14px; font-size: 12px;">
+            <span class="v-in">{{b.entrou}}</span>
+            <span class="{{b.saiuCls}}">{{b.saiu}}</span>
+            <span style="color: #6b6b6b;">em outubro</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+
+    <section aria-label="Movimentações" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 6px 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0 4px; gap: 8px;">
+        <h2 style="margin: 0; font-size: 16px; font-weight: 600;">Movimentações de outubro</h2>
+        <span style="font-size: 12px; color: #6b6b6b;">{{filtro}}</span>
+      </div>
+      <sc-for list="{{movs}}" as="mv" hint-placeholder-count="4">
+        <div class="row">
+          <span class="{{mv.icoCls}}" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{mv.path}}"></path></svg></span>
+          <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">{{mv.titulo}}</span><span style="font-size: 12px; color: #6b6b6b;">{{mv.meta}}</span></span>
+          <span class="{{mv.vCls}}">{{mv.valor}}</span>
+        </div>
+      </sc-for>
+    </section>
+    <span style="font-size: 12px; color: #6b6b6b;">Verde é o que entrou na reserva, vermelho é o que saiu dela. Na conta acontece o contrário: um aporte conta como saída e um resgate como entrada.</span>
+  </main>
+
+  <nav aria-label="Navegação principal" style="height: 64px; flex: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: #ffffff; border-top: 1px solid #e5e5e5;">
+    <a href="Main.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg></span>Mês</a>
+    <a href="Ano.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="3.5" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="3.5" y="16" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="16" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="16" width="4.5" height="4.5" rx="1"></rect></svg></span>Ano</a>
+    <a href="Dia.dc.html" class="tab" style="color: #0a0a0a; font-weight: 600;"><span style="width: 52px; height: 52px; margin-top: -22px; border-radius: 999px; background: #0a0a0a; color: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 5px #ffffff;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Lançar</a>
+    <a href="Economia.dc.html" class="tab on" aria-current="page"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="13" rx="2.5"></rect><path d="M7 6.5V5a1.5 1.5 0 0 1 1.5-1.5h7A1.5 1.5 0 0 1 17 5v1.5"></path><circle cx="12" cy="13" r="2.5"></circle></svg></span>Economia</a>
+    <a href="Resumo.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"></path></svg></span>Resumo</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1240}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: null }; }
+  renderVals() {
+    var self = this, sel = this.state.sel;
+    var fmt = function (v) { return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+    var defs = [
+      { id: 'emerg', nome: 'Reserva de emergência', saldo: 8400, meta: 15000, entrou: 500, saiu: 0 },
+      { id: 'inv', nome: 'Investimentos', saldo: 12350, meta: 0, entrou: 1000, saiu: 0 },
+      { id: 'viagem', nome: 'Viagem', saldo: 2100, meta: 6000, entrou: 300, saiu: 450 }
+    ];
+    var movs = [
+      { box: 'inv', titulo: 'Aporte', meta: '04/10 · Investimentos · Tesouro Selic', v: 1000 },
+      { box: 'emerg', titulo: 'Aporte', meta: '05/10 · Reserva de emergência', v: 500 },
+      { box: 'viagem', titulo: 'Aporte', meta: '12/10 · Viagem', v: 300 },
+      { box: 'viagem', titulo: 'Resgate', meta: '13/10 · Viagem · passagem aérea', v: -450 }
+    ];
+    var totals = [15200, 15900, 16400, 16100, 17300, 18000, 18900, 20200, 21500, 22850];
+    var meses = ['j', 'f', 'm', 'a', 'm', 'j', 'j', 'a', 's', 'o'];
+    var nomeSel = sel ? defs.filter(function (d) { return d.id === sel; })[0].nome : null;
+    return {
+      bars: totals.map(function (t, i) { return { m: meses[i], h: Math.round(t / 22850 * 48) + 'px', color: i === 9 ? '#ffffff' : '#5c5c5c' }; }),
+      boxes: defs.map(function (d) {
+        var on = sel === d.id;
+        return { nome: d.nome, saldo: fmt(d.saldo), temMeta: d.meta > 0,
+          pct: d.meta ? Math.round(d.saldo / d.meta * 100) + '%' : '0%',
+          metaTxt: d.meta ? Math.round(d.saldo / d.meta * 100) + '% da meta de ' + fmt(d.meta) : '',
+          entrou: '+ ' + d.entrou.toLocaleString('pt-BR', { minimumFractionDigits: 2 }),
+          saiu: '− ' + d.saiu.toLocaleString('pt-BR', { minimumFractionDigits: 2 }), saiuCls: d.saiu ? 'v-out' : 'v-out',
+          cls: on ? 'box on' : 'box', on: on ? 'true' : 'false',
+          pick: function () { self.setState({ sel: on ? null : d.id }); } };
+      }),
+      filtro: nomeSel ? 'só ' + nomeSel : 'todas as reservas',
+      movs: movs.filter(function (m) { return !sel || m.box === sel; }).map(function (m) {
+        var inn = m.v > 0;
+        return { titulo: m.titulo, meta: m.meta, valor: (inn ? '+ ' : '− ') + fmt(Math.abs(m.v)),
+          vCls: inn ? 'v-in' : 'v-out', icoCls: inn ? 'ico in' : 'ico out',
+          path: inn ? 'M12 19V5M6 11l6-6 6 6' : 'M12 5v14M6 13l6 6 6-6' };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

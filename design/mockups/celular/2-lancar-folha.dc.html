@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Lançar no dia</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0a0a0a}a:hover{color:#404040}
+.pill{flex:1 1 0;height:44px;border:0;border-radius:999px;background:transparent;color:#6b6b6b;font:inherit;font-weight:500;cursor:pointer}
+.pill.on{background:#0a0a0a;color:#ffffff;font-weight:600}
+.pill:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid #0a0a0a;outline-offset:2px}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:0 12px;align-items:center;padding:12px 0;border-bottom:1px solid #efefef;text-decoration:none;color:#0a0a0a}
+.row:last-child{border-bottom:0}
+.ico{width:32px;height:32px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+.ico.in{background:#dcfce7;color:#15803d}
+.ico.out{background:#fee2e2;color:#dc2626}
+.v-in{color:#15803d;font-weight:700;white-space:nowrap}
+.v-out{color:#dc2626;font-weight:700;white-space:nowrap}
+</style>
+</helmet>
+<div style="width: 390px; height: 1120px; position: relative; overflow: hidden; background: #f5f5f5; font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; font-variant-numeric: tabular-nums;">
+  <div aria-hidden="true" style="position: absolute; inset: 0 0 auto 0;">
+    <dc-import name="Main" hint-size="390px,1120px"></dc-import>
+  </div>
+  <a href="Main.dc.html" aria-label="Fechar e voltar ao mês" style="position: absolute; inset: 0; background: rgba(10,10,10,.5);"></a>
+
+  <section role="dialog" aria-modal="true" aria-labelledby="dia-t" style="position: absolute; left: 0; right: 0; bottom: 0; height: 1010px; box-sizing: border-box; background: #ffffff; color: #0a0a0a; border-radius: 24px 24px 0 0; display: flex; flex-direction: column; font-size: 14px; line-height: 1.5;">
+    <div aria-hidden="true" style="display: flex; justify-content: center; padding: 10px 0 4px;"><span style="width: 40px; height: 4px; border-radius: 999px; background: #d4d4d4;"></span></div>
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 8px 12px 12px 20px;">
+      <div style="display: flex; flex-direction: column; min-width: 0;">
+        <span style="font-size: 13px; font-weight: 600; color: #6b6b6b;">Domingo</span>
+        <h2 id="dia-t" style="margin: 0; font-size: 22px; line-height: 1.3; font-weight: 700;">4 de outubro</h2>
+      </div>
+      <a href="Main.dc.html" aria-label="Fechar" style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #0a0a0a; flex: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></a>
+    </div>
+
+    <div style="flex: 1; overflow: auto; padding: 0 20px 24px; display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 12px; border-radius: 14px; background: #f5f5f5;">
+        <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 11px; color: #6b6b6b;">Entrou</span><span style="font-size: 13px; font-weight: 700; color: #15803d;">6.450,00</span></div>
+        <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 11px; color: #6b6b6b;">Saiu</span><span style="font-size: 13px; font-weight: 700; color: #dc2626;">3.025,70</span></div>
+        <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 11px; color: #6b6b6b;">Diário</span><span style="font-size: 13px; font-weight: 700; color: #dc2626;">100,00</span></div>
+        <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 11px; color: #6b6b6b;">Saldo</span><span style="align-self: flex-start; font-size: 12px; font-weight: 700; padding: 1px 6px; border-radius: 6px; background: #a3dcae; color: #0a0a0a;">3.627,09</span></div>
+      </div>
+
+      <form aria-label="Novo lançamento" style="display: flex; flex-direction: column; gap: 14px;">
+        <div role="group" aria-label="Tipo de lançamento" style="display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: #f0f0f0;">
+          <sc-for list="{{tipos}}" as="t" hint-placeholder-count="3">
+            <button type="button" class="{{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.pick}}">{{t.label}}</button>
+          </sc-for>
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; height: 64px; padding: 0 16px; border: 1px solid #8a8a8a; border-radius: 14px;">
+          <span style="font-size: 18px; font-weight: 600; color: #6b6b6b;">R$</span>
+          <input inputmode="decimal" placeholder="0,00" aria-label="Valor em reais" style="flex: 1; min-width: 0; border: 0; font: inherit; font-size: 28px; font-weight: 700; color: {{valColor}}; background: transparent; outline: none;">
+        </label>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px;">
+          <label style="display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 13px; font-weight: 600;">Categoria</span>
+            <select style="height: 48px; padding: 0 10px; border: 1px solid #8a8a8a; border-radius: 10px; font: inherit; color: #0a0a0a; background: #ffffff; min-width: 0;">
+              <sc-for list="{{cats}}" as="c" hint-placeholder-count="5"><option>{{c}}</option></sc-for>
+            </select>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 13px; font-weight: 600;">Descrição</span>
+            <input placeholder="Opcional" style="height: 48px; box-sizing: border-box; width: 100%; padding: 0 12px; border: 1px solid #8a8a8a; border-radius: 10px; font: inherit; color: #0a0a0a; background: #ffffff;">
+          </label>
+        </div>
+        <span style="font-size: 12px; color: #6b6b6b; margin-top: -6px;">{{hint}}</span>
+        <div style="display: flex; flex-direction: column; border: 1px solid #e5e5e5; border-radius: 12px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 6px 6px 14px;">
+            <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">Parcelas</span><span style="font-size: 12px; color: #6b6b6b;">{{parcHint}}</span></span>
+            <span style="display: flex; align-items: center; gap: 2px; flex: none;">
+              <button type="button" aria-label="Menos uma parcela" onClick="{{parcDown}}" style="width: 40px; height: 40px; border: 1px solid #d4d4d4; border-radius: 999px; background: #ffffff; font: inherit; font-size: 18px; color: #0a0a0a; cursor: pointer;">−</button>
+              <span aria-live="polite" style="min-width: 40px; text-align: center; font-weight: 700;">{{parcTxt}}</span>
+              <button type="button" aria-label="Mais uma parcela" onClick="{{parcUp}}" style="width: 40px; height: 40px; border: 1px solid #d4d4d4; border-radius: 999px; background: #ffffff; font: inherit; font-size: 18px; color: #0a0a0a; cursor: pointer;">+</button>
+            </span>
+          </div>
+          <button type="button" role="switch" aria-checked="{{rep}}" onClick="{{toggleRep}}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 6px 14px; border: 0; border-top: 1px solid #efefef; background: transparent; font: inherit; color: #0a0a0a; text-align: left; cursor: pointer; border-radius: 0 0 12px 12px;">
+            <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">Repete todo mês</span><span style="font-size: 12px; color: #6b6b6b;">{{repHint}}</span></span>
+            <span style="flex: none; width: 46px; height: 28px; border-radius: 999px; background: {{repBg}}; position: relative;"><span style="position: absolute; top: 3px; left: {{repX}}; width: 22px; height: 22px; border-radius: 999px; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,.25);"></span></span>
+          </button>
+        </div>
+        <button type="button" style="height: 52px; border: 0; border-radius: 999px; background: #0a0a0a; color: #ffffff; font: inherit; font-weight: 600; cursor: pointer;">Adicionar {{btnLabel}}</button>
+      </form>
+
+      <section aria-label="Lançamentos do dia" style="display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 6px; border-top: 1px solid #e5e5e5;">
+          <h3 style="margin: 12px 0 2px; font-size: 16px; font-weight: 600;">Entradas e saídas do dia</h3>
+          <span style="font-size: 12px; color: #6b6b6b;">4 itens</span>
+        </div>
+        <a href="#editar" class="row"><span class="ico in" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></span><span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">Salário</span><span style="font-size: 12px; color: #6b6b6b;">Entrada · Salário / pró-labore</span></span><span class="v-in">+ R$ 6.450,00</span></a>
+        <a href="#editar" class="row"><span class="ico out" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></span><span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">Aluguel</span><span style="font-size: 12px; color: #6b6b6b;">Saída · Moradia</span></span><span class="v-out">− R$ 1.800,00</span></a>
+        <a href="#editar" class="row"><span class="ico out" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></span><span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">Fatura do cartão</span><span style="font-size: 12px; color: #6b6b6b;">Saída · Fatura do cartão</span></span><span class="v-out">− R$ 1.225,70</span></a>
+        <a href="#editar" class="row"><span class="ico out" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></span><span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">Combustível</span><span style="font-size: 12px; color: #6b6b6b;">Diário · Transporte</span></span><span class="v-out">− R$ 100,00</span></a>
+      </section>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1120}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tipo: 'diario', parc: 1, rep: false }; }
+  renderVals() {
+    var self = this, cur = this.state.tipo, parc = this.state.parc, rep = this.state.rep;
+    var meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    var last = new Date(2026, 9 + parc - 1, 4);
+    var extra = {
+      parcTxt: parc + '×',
+      parcHint: parc === 1 ? 'À vista, só neste dia' : 'O valor é dividido em ' + parc + '; a última cai em 04 de ' + meses[last.getMonth()] + (last.getFullYear() > 2026 ? ' de ' + last.getFullYear() : ''),
+      parcDown: function () { self.setState({ parc: Math.max(1, parc - 1) }); },
+      parcUp: function () { self.setState({ parc: Math.min(48, parc + 1) }); },
+      rep: rep ? 'true' : 'false', repBg: rep ? '#0a0a0a' : '#c8c8c8', repX: rep ? '21px' : '3px',
+      repHint: rep ? 'Cria um lançamento no dia 4 de cada mês. Dá para mover ou apagar cada um depois.' : 'Desligado: lance cada mês quando souber a data.',
+      toggleRep: function () { self.setState({ rep: !rep }); }
+    };
+    var defs = [['entrada', 'Entrada'], ['saida', 'Saída'], ['diario', 'Diário']];
+    var info = {
+      entrada: { hint: 'Dinheiro que entra: salário, Pix recebido, resgate de uma reserva.', btn: 'entrada', cats: ['Salário / pró-labore', 'Renda extra', 'Resgate · Reserva de emergência', 'Resgate · Viagem'] },
+      saida: { hint: 'Contas e compromissos. Para guardar dinheiro, escolha uma categoria de economia.', btn: 'saída', cats: ['Moradia', 'Fatura do cartão', 'Contas e boletos', 'Aporte · Reserva de emergência', 'Aporte · Investimentos', 'Aporte · Viagem'] },
+      diario: { hint: 'Gasto do dia a dia: mercado, padaria, transporte, lanche.', btn: 'ao diário', cats: ['Transporte', 'Mercado', 'Alimentação', 'Saúde', 'Lazer'] }
+    };
+    return {
+      parcTxt: extra.parcTxt, parcHint: extra.parcHint, parcDown: extra.parcDown, parcUp: extra.parcUp,
+      rep: extra.rep, repBg: extra.repBg, repX: extra.repX, repHint: extra.repHint, toggleRep: extra.toggleRep,
+      hint: info[cur].hint, btnLabel: info[cur].btn, cats: info[cur].cats,
+      valColor: cur === 'entrada' ? '#15803d' : '#dc2626',
+      tipos: defs.map(function (d) {
+        return { label: d[1], on: d[0] === cur ? 'true' : 'false', cls: d[0] === cur ? 'pill on' : 'pill',
+          pick: function () { self.setState({ tipo: d[0] }); } };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

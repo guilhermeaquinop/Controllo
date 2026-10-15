@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ajustes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0a0a0a}a:hover{color:#404040}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid #0a0a0a;outline-offset:2px}
+.catrow{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;border-bottom:1px solid #efefef;text-decoration:none;color:#0a0a0a}
+.catrow:last-child{border-bottom:0}
+.zrow{display:grid;grid-template-columns:28px minmax(0,1fr) 120px;align-items:center;gap:12px}
+.zsw{width:28px;height:28px;border-radius:8px}
+.zin{height:44px;box-sizing:border-box;width:100%;padding:0 12px;border:1px solid #8a8a8a;border-radius:10px;font:inherit;color:#0a0a0a;background:#ffffff;text-align:right}
+.tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#ebebeb;color:#0a0a0a}
+</style>
+</helmet>
+<div style="width: 390px; height: 1560px; box-sizing: border-box; background: #f5f5f5; color: #0a0a0a; font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.5; font-variant-numeric: tabular-nums; display: flex; flex-direction: column;">
+
+  <header style="height: 56px; flex: none; display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 0 4px; background: #ffffff; border-bottom: 1px solid #e5e5e5;">
+    <a href="Main.dc.html" aria-label="Voltar" style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #0a0a0a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 6-6 6 6 6"></path></svg></a>
+    <h1 style="margin: 0; text-align: center; font-size: 18px; font-weight: 700;">Ajustes</h1>
+    <span></span>
+  </header>
+
+  <main style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px 16px 24px;">
+    <section aria-label="Saldo inicial" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h2 style="margin: 0; font-size: 16px; line-height: 1.4; font-weight: 600;">Saldo inicial</h2>
+        <p style="margin: 0; font-size: 12px; color: #6b6b6b;">Quanto havia na conta no começo do dia escolhido. Daí em diante o saldo passa de um dia para o outro e de um mês para o outro.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px;">
+        <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px; font-weight: 600;">Valor</span><input inputmode="decimal" value="R$ 635,08" style="height: 48px; box-sizing: border-box; width: 100%; padding: 0 14px; border: 1px solid #8a8a8a; border-radius: 10px; font: inherit; color: #0a0a0a; background: #ffffff;"></label>
+        <label style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px; font-weight: 600;">No dia</span><input value="01/10/2026" style="height: 48px; box-sizing: border-box; width: 100%; padding: 0 14px; border: 1px solid #8a8a8a; border-radius: 10px; font: inherit; color: #0a0a0a; background: #ffffff;"></label>
+      </div>
+    </section>
+
+    <section aria-label="Faixas de cor do saldo" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h2 style="margin: 0; font-size: 16px; line-height: 1.4; font-weight: 600;">Faixas de cor do saldo</h2>
+        <p style="margin: 0; font-size: 12px; color: #6b6b6b;">Como cada dia aparece no calendário do mês e do ano.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="zrow"><span class="zsw" style="background: #a33a32;"></span><span style="font-weight: 600;">Negativo</span><span style="font-size: 12px; color: #6b6b6b; text-align: right;">abaixo de 0</span></div>
+        <label class="zrow"><span class="zsw" style="background: #ec8b84;"></span><span style="font-weight: 600;">Abaixo de</span><input class="zin" inputmode="decimal" value="1.000"></label>
+        <label class="zrow"><span class="zsw" style="background: #f2d46b;"></span><span style="font-weight: 600;">Abaixo de</span><input class="zin" inputmode="decimal" value="2.000"></label>
+        <label class="zrow"><span class="zsw" style="background: #a3dcae;"></span><span style="font-weight: 600;">Abaixo de</span><input class="zin" inputmode="decimal" value="4.000"></label>
+        <div class="zrow"><span class="zsw" style="background: #5bab72;"></span><span style="font-weight: 600;">4.000 ou mais</span><span></span></div>
+      </div>
+    </section>
+
+    <section aria-label="Categorias" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+        <h2 style="margin: 0; font-size: 16px; line-height: 1.4; font-weight: 600;">Categorias</h2>
+        <button type="button" style="height: 40px; padding: 0 14px; border: 1px solid #0a0a0a; border-radius: 999px; background: #ffffff; color: #0a0a0a; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nova</button>
+      </div>
+      <span style="font-size: 13px; font-weight: 600; color: #6b6b6b;">Saídas e diário</span>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{saidas}}" as="c" hint-placeholder-count="8">
+          <a href="#editar-categoria" class="catrow"><span>{{c}}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6"></path></svg></a>
+        </sc-for>
+      </div>
+      <span style="font-size: 13px; font-weight: 600; color: #6b6b6b; padding-top: 4px;">Entradas</span>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{entradas}}" as="c" hint-placeholder-count="3">
+          <a href="#editar-categoria" class="catrow"><span>{{c}}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6"></path></svg></a>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px; padding-top: 4px;">
+        <span style="font-size: 13px; font-weight: 600; color: #6b6b6b;">Economia</span>
+        <span style="font-size: 12px; color: #6b6b6b;">Aparecem como aporte nas saídas e como resgate nas entradas, e têm a própria tela.</span>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{reservas}}" as="r" hint-placeholder-count="3">
+          <a href="Economia.dc.html" class="catrow"><span>{{r.nome}}</span><span style="display: flex; align-items: center; gap: 8px;"><span class="tag">{{r.tag}}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6"></path></svg></span></a>
+        </sc-for>
+      </div>
+    </section>
+
+    <button type="button" style="height: 52px; flex: none; border: 0; border-radius: 999px; background: #0a0a0a; color: #ffffff; font: inherit; font-weight: 600; cursor: pointer;">Salvar ajustes</button>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1560}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      saidas: ['Moradia', 'Fatura do cartão', 'Contas e boletos', 'Mercado', 'Alimentação', 'Transporte', 'Saúde', 'Lazer'],
+      entradas: ['Salário / pró-labore', 'Renda extra', 'Outras entradas'],
+      reservas: [{ nome: 'Reserva de emergência', tag: 'meta 15.000' }, { nome: 'Investimentos', tag: 'sem meta' }, { nome: 'Viagem', tag: 'meta 6.000' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

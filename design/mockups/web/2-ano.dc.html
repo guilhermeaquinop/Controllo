@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ano · web</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0a0a0a}a:hover{color:#404040}
+button:focus-visible,a:focus-visible{outline:2px solid #0a0a0a;outline-offset:2px}
+.nav{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:10px;color:#6b6b6b;font-weight:500;text-decoration:none}
+.nav:hover{background:#f5f5f5;color:#0a0a0a}
+.nav.on{background:#ebebeb;color:#0a0a0a;font-weight:600}
+.ibtn{width:44px;height:44px;border:0;background:transparent;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0a0a0a;cursor:pointer}
+.ibtn:hover{background:#f0f0f0}
+.mcard{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:14px;background:#ffffff;border:1px solid #e5e5e5;text-decoration:none;color:#0a0a0a;min-width:0}
+.mcard:hover{border-color:#8a8a8a}
+.mcard.cur{border:2px solid #0a0a0a;padding:15px}
+.mgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.d{aspect-ratio:1/1;border-radius:4px;max-width:100%}
+.d.blank{visibility:hidden}
+.d.fut{background:#ececec}
+.d.prev{box-shadow:inset 0 0 0 2px rgba(255,255,255,.85)}
+.d.today{outline:2px solid #0a0a0a;outline-offset:1px}
+.z-neg{background:#a33a32}.z-red{background:#ec8b84}.z-yel{background:#f2d46b}.z-grn{background:#a3dcae}.z-dgr{background:#5bab72}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.p-in{color:#15803d}.p-out{color:#dc2626}.p-none{color:#8a8a8a}
+.met{display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 20px;border-left:1px solid #efefef}
+.met:first-child{border-left:0;padding-left:0}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 1100px; box-sizing: border-box; display: flex; flex-wrap: wrap; background: #f5f5f5; color: #0a0a0a; font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.5; font-variant-numeric: tabular-nums;">
+
+  <aside aria-label="Menu" style="flex: 1 1 220px; box-sizing: border-box; background: #ffffff; border-right: 1px solid #e5e5e5; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+      <svg viewBox="0 0 612 112" width="146" height="27" role="img" aria-label="Controllo"><rect x="0" y="10.5" width="96" height="96" rx="26" fill="#0a0a0a"></rect><g fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round"><path d="M38 56.5V80.5"></path><path d="M58 36.5V80.5"></path></g><g transform="translate(128 0)" fill="none" stroke="#0a0a0a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"><path d="M46.62 59.88A23.5 23.5 0 1 0 46.62 93.12"></path><circle cx="100" cy="76.5" r="23.5"></circle><path d="M146.5 100V76.5A23.5 23.5 0 0 1 193.5 76.5V100"></path><path d="M222 24V100M211 53H236"></path><path d="M260.5 100V76.5A23.5 23.5 0 0 1 284 53"></path><circle cx="330" cy="76.5" r="23.5"></circle><path d="M378.5 34V100"></path><path d="M404.5 14V100"></path><circle cx="453" cy="76.5" r="23.5"></circle></g></svg>
+    </div>
+    <a href="WebMes.dc.html" style="height: 44px; border-radius: 999px; background: #0a0a0a; color: #ffffff; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Lançar</a>
+    <nav aria-label="Navegação principal" style="display: flex; flex-direction: column; gap: 4px;">
+      <a href="WebMes.dc.html" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>Mês</a>
+      <a href="WebAno.dc.html" class="nav on" aria-current="page"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"></rect><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"></rect></svg>Ano</a>
+      <a href="WebEconomia.dc.html" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="13" rx="2.5"></rect><path d="M7 6.5V5a1.5 1.5 0 0 1 1.5-1.5h7A1.5 1.5 0 0 1 17 5v1.5"></path><circle cx="12" cy="13" r="2.5"></circle></svg>Economia</a>
+      <a href="WebResumo.dc.html" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"></path></svg>Resumo</a>
+    </nav>
+    <nav aria-label="Conta" style="margin-top: auto; display: flex; flex-direction: column; gap: 4px; padding-top: 16px; border-top: 1px solid #efefef;">
+      <a href="#ajustes" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"></path></svg>Ajustes</a>
+      <a href="WebLogin.dc.html" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4.5H5.5a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1H10M14.5 8l4 4-4 4M18.5 12H9"></path></svg>Sair</a>
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px clamp(16px, 2.5vw, 36px) 40px; display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 4px;">
+        <button type="button" class="ibtn" aria-label="Ano anterior: 2025"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 6-6 6 6 6"></path></svg></button>
+        <h1 style="margin: 0; font-size: 26px; font-weight: 700; min-width: 80px; text-align: center;">2026</h1>
+        <button type="button" class="ibtn" aria-label="Próximo ano: 2027"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6"></path></svg></button>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; color: #6b6b6b;">
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-neg"></span>negativo</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-red"></span>até 1.000</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-yel"></span>até 2.000</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-grn"></span>até 4.000</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-dgr"></span>acima</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-grn" style="box-shadow: inset 0 0 0 2px rgba(255,255,255,.85);"></span>previsto (anel branco)</span>
+      </div>
+    </div>
+
+    <section aria-label="Totais do ano" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 0;">
+      <div class="met" style="flex: 1 1 240px;"><span style="font-size: 13px; color: #6b6b6b;">Performance de janeiro a outubro</span><span class="{{yearPerfCls}}" style="font-size: 28px; line-height: 1.2; font-weight: 700;">{{yearPerf}}</span></div>
+      <div class="met" style="flex: 1 1 160px;"><span style="font-size: 13px; color: #6b6b6b;">Entradas</span><span style="font-size: 17px; font-weight: 700;">{{yearIn}}</span></div>
+      <div class="met" style="flex: 1 1 160px;"><span style="font-size: 13px; color: #6b6b6b;">Saída total</span><span style="font-size: 17px; font-weight: 700;">{{yearOut}}</span></div>
+      <div class="met" style="flex: 1 1 160px;"><span style="font-size: 13px; color: #6b6b6b;">Melhor mês</span><span style="font-size: 17px; font-weight: 700;">{{best}}</span></div>
+      <div class="met" style="flex: 1 1 160px;"><span style="font-size: 13px; color: #6b6b6b;">Dias abaixo de 1.000</span><span style="font-size: 17px; font-weight: 700;">{{redDays}}</span></div>
+      <div class="met" style="flex: 1 1 200px;"><span style="font-size: 13px; color: #6b6b6b;">Saldo previsto em 31/12 <span style="font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 999px; border: 1px dashed #8a8a8a; color: #0a0a0a;">previsão</span></span><span class="{{endCls}}" style="font-size: 17px; font-weight: 700;">{{endSaldo}}</span></div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; border-radius: 14px; background: #ffffff; border: 1px solid #e5e5e5;">
+      <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">Previsão dos próximos meses</span><span style="font-size: 12px; color: #6b6b6b;">Soma os lançamentos agendados, os recorrentes e as parcelas. As setas avançam para 2027 e além.</span></span>
+      <button type="button" role="switch" aria-checked="{{incl}}" onClick="{{toggle}}" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 4px; border: 0; background: transparent; font: inherit; color: #0a0a0a; cursor: pointer;">
+        <span style="display: flex; flex-direction: column; text-align: right;"><span style="font-weight: 600;">Contar o gasto diário</span><span style="font-size: 12px; color: #6b6b6b;">média de {{avgTxt}} por dia</span></span>
+        <span style="flex: none; width: 46px; height: 28px; border-radius: 999px; background: {{trackBg}}; position: relative;"><span style="position: absolute; top: 3px; left: {{knobX}}; width: 22px; height: 22px; border-radius: 999px; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,.25);"></span></span>
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 14px;">
+      <sc-for list="{{months}}" as="m" hint-placeholder-count="12">
+        <a href="WebMes.dc.html" class="{{m.cls}}" aria-label="{{m.label}}">
+          <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+            <span style="font-size: 15px; font-weight: 700;">{{m.nome}} <span style="font-size: 11px; font-weight: 600; color: #6b6b6b;">{{m.tag}}</span></span>
+            <span class="{{m.perfCls}}" style="font-size: 13px; font-weight: 700;">{{m.perf}}</span>
+          </span>
+          <span class="mgrid"><sc-for list="{{m.cells}}" as="c" hint-placeholder-count="35"><span class="{{c}}"></span></sc-for></span>
+          <span style="display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: #6b6b6b;"><span>{{m.inTxt}}</span><span>{{m.outTxt}}</span></span>
+        </a>
+      </sc-for>
+    </div>
+    <span style="font-size: 12px; color: #6b6b6b;">Cada quadrado é o saldo no fim do dia; depois de hoje, é a previsão. Clique num mês para abri-lo. De janeiro a setembro são dados de exemplo, outubro é o mês da planilha e novembro e dezembro mostram a previsão.</span>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { incl: true }; }
+  renderVals() {
+    var self = this, incl = this.state.incl, avg = 186.33;
+    var seed = 7;
+    function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+    var longos = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    var y = 2026, m, d, flows = [], ins = [], outs = [];
+    for (m = 0; m < 12; m++) { flows.push([]); ins.push(0); outs.push(0); }
+    for (m = 0; m < 9; m++) {
+      var dim = new Date(y, m + 1, 0).getDate();
+      for (d = 1; d <= dim; d++) {
+        var e = 0, s = 0;
+        if (d === 5) e += 6450;
+        if (d === 20 && rnd() > 0.4) e += Math.round(300 + rnd() * 1400);
+        if (d === 10) s += 1800;
+        if (d === 12) s += Math.round(900 + rnd() * 1500);
+        if (d === 15) s += Math.round(150 + rnd() * 350);
+        if (rnd() > 0.15) s += Math.round(rnd() * 240);
+        flows[m].push(e - s); ins[m] += e; outs[m] += s;
+      }
+    }
+    var ent = {3:317,4:6450,8:7500,12:500,15:100,18:1000,19:934.5,21:1000,24:150,29:500,30:50};
+    var sai = {2:200,4:3025.7,8:7831.54,10:46.73,18:200,19:1339.5};
+    var dia = [0,12.29,437,100,799.5,640.58,336.29,134,94,17,275.06,583.57,356.74,122.9,10,0,159.9,11,467.18,107,119.49,0,84.7,150,214.75,238.2,142,100,62.99,0,0];
+    for (d = 1; d <= 31; d++) { var ee = ent[d] || 0, ss = (sai[d] || 0) + dia[d - 1]; flows[9].push(ee - ss); ins[9] += ee; outs[9] += ss; }
+    var fut = [
+      { e: { 5: 6450, 18: 1200 }, s: { 10: 1800, 12: 1650, 15: 182.4, 20: 46.73, 25: 119.9 } },
+      { e: { 5: 6450 }, s: { 10: 1800, 12: 2100, 15: 190, 20: 46.73, 22: 600, 25: 119.9 } }
+    ];
+    for (m = 10; m < 12; m++) {
+      var f = fut[m - 10], dm = new Date(y, m + 1, 0).getDate();
+      for (d = 1; d <= dm; d++) {
+        var fe = f.e[d] || 0, fs = (f.s[d] || 0) + (incl ? avg : 0);
+        flows[m].push(fe - fs); ins[m] += fe; outs[m] += fs;
+      }
+    }
+    var sumBefore = 0; for (m = 0; m < 9; m++) flows[m].forEach(function (f) { sumBefore += f; });
+    var saldo = 635.08 - sumBefore, redDays = 0;
+    var fmt = function (v) { return 'R$ ' + Math.abs(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+    var k = function (v) { return Math.round(Math.abs(v)).toLocaleString('pt-BR'); };
+    var months = [], bestM = 0, bestV = -1e9;
+    for (m = 0; m < 12; m++) {
+      var off = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate(), cells = [], i;
+      for (i = 0; i < off; i++) cells.push('d blank');
+      for (d = 1; d <= days; d++) {
+        saldo += flows[m][d - 1];
+        var future = m > 9 || (m === 9 && d > 15);
+        if (saldo < 1000 && !future) redDays++;
+        var z = saldo < 0 ? 'z-neg' : saldo < 1000 ? 'z-red' : saldo < 2000 ? 'z-yel' : saldo < 4000 ? 'z-grn' : 'z-dgr';
+        cells.push('d ' + z + (m === 9 && d === 15 ? ' today' : '') + (future ? ' prev' : ''));
+      }
+      var perf = ins[m] - outs[m], prev = m > 9;
+      if (!prev && perf > bestV) { bestV = perf; bestM = m; }
+      months.push({ nome: longos[m], tag: prev ? 'previsto' : '', cells: cells, cls: 'mcard' + (m === 9 ? ' cur' : ''),
+        perf: (perf >= 0 ? '+ ' : '− ') + k(perf), perfCls: perf >= 0 ? 'p-in' : 'p-out',
+        inTxt: (prev ? 'entra ' : 'entrou ') + k(ins[m]), outTxt: (prev ? 'sai ' : 'saiu ') + k(outs[m]),
+        label: longos[m] + (prev ? ', previsão de performance ' : ', performance ') + (perf >= 0 ? 'positiva de ' : 'negativa de ') + fmt(perf) });
+    }
+    var tin = 0, tout = 0; for (m = 0; m < 10; m++) { tin += ins[m]; tout += outs[m]; }
+    var yp = tin - tout;
+    return { months: months, yearIn: fmt(tin), yearOut: fmt(tout), yearPerf: (yp >= 0 ? '+ ' : '− ') + fmt(yp),
+      yearPerfCls: yp >= 0 ? 'p-in' : 'p-out', redDays: String(redDays), best: longos[bestM] + ' · + ' + k(bestV),
+      endSaldo: (saldo < 0 ? '− ' : '') + fmt(saldo), endCls: saldo < 0 ? 'p-out' : '',
+      incl: incl ? 'true' : 'false', trackBg: incl ? '#0a0a0a' : '#c8c8c8', knobX: incl ? '21px' : '3px',
+      avgTxt: 'R$ 186,33', toggle: function () { self.setState({ incl: !incl }); } };
+  }
+}
+</script>
+</body>
+</html>

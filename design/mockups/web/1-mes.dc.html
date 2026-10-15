@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Mês · web</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0a0a0a}a:hover{color:#404040}
+input:focus-visible,button:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid #0a0a0a;outline-offset:2px}
+.nav{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:10px;color:#6b6b6b;font-weight:500;text-decoration:none}
+.nav:hover{background:#f5f5f5;color:#0a0a0a}
+.nav.on{background:#ebebeb;color:#0a0a0a;font-weight:600}
+.ibtn{width:44px;height:44px;border:0;background:transparent;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0a0a0a;cursor:pointer}
+.ibtn:hover{background:#f0f0f0}
+.cell{display:flex;flex-direction:column;justify-content:space-between;gap:4px;min-height:104px;padding:8px;box-sizing:border-box;border-radius:10px;border:1px solid #e5e5e5;background:#ffffff;text-align:left;font:inherit;color:#0a0a0a;cursor:pointer;min-width:0}
+.cell:hover{border-color:#8a8a8a}
+.cell.sel{border:2px solid #0a0a0a;padding:7px}
+.cell.blank{visibility:hidden}
+.n{font-size:13px;font-weight:600;width:24px;height:24px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+.cell.today .n{background:#0a0a0a;color:#ffffff}
+.fl{display:flex;flex-direction:column;font-size:11px;font-weight:600;line-height:1.35;min-width:0}
+.fl span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f-in{color:#15803d}.f-out{color:#dc2626}.f-dia{color:#6b6b6b;font-weight:500}
+.chip{font-size:12px;font-weight:700;padding:3px 6px;border-radius:6px;text-align:right;white-space:nowrap;overflow:hidden}
+.z-neg{background:#a33a32;color:#ffffff}.z-red{background:#ec8b84;color:#0a0a0a}.z-yel{background:#f2d46b;color:#0a0a0a}.z-grn{background:#a3dcae;color:#0a0a0a}.z-dgr{background:#5bab72;color:#0a0a0a}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.pill{flex:1 1 0;height:40px;border:0;border-radius:999px;background:transparent;color:#6b6b6b;font:inherit;font-weight:500;cursor:pointer}
+.pill.on{background:#0a0a0a;color:#ffffff;font-weight:600}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:0 12px;align-items:center;padding:11px 0;border-bottom:1px solid #efefef}
+.row:last-child{border-bottom:0}
+.ico{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+.ico.in{background:#dcfce7;color:#15803d}.ico.out{background:#fee2e2;color:#dc2626}
+.v-in{color:#15803d;font-weight:700;white-space:nowrap}.v-out{color:#dc2626;font-weight:700;white-space:nowrap}
+.met{display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 20px;border-left:1px solid #efefef}
+.met:first-child{border-left:0;padding-left:0}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 1180px; box-sizing: border-box; display: flex; flex-wrap: wrap; background: #f5f5f5; color: #0a0a0a; font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.5; font-variant-numeric: tabular-nums;">
+
+  <aside aria-label="Menu" style="flex: 1 1 220px; box-sizing: border-box; background: #ffffff; border-right: 1px solid #e5e5e5; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+      <svg viewBox="0 0 612 112" width="146" height="27" role="img" aria-label="Controllo"><rect x="0" y="10.5" width="96" height="96" rx="26" fill="#0a0a0a"></rect><g fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round"><path d="M38 56.5V80.5"></path><path d="M58 36.5V80.5"></path></g><g transform="translate(128 0)" fill="none" stroke="#0a0a0a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"><path d="M46.62 59.88A23.5 23.5 0 1 0 46.62 93.12"></path><circle cx="100" cy="76.5" r="23.5"></circle><path d="M146.5 100V76.5A23.5 23.5 0 0 1 193.5 76.5V100"></path><path d="M222 24V100M211 53H236"></path><path d="M260.5 100V76.5A23.5 23.5 0 0 1 284 53"></path><circle cx="330" cy="76.5" r="23.5"></circle><path d="M378.5 34V100"></path><path d="M404.5 14V100"></path><circle cx="453" cy="76.5" r="23.5"></circle></g></svg>
+    </div>
+    <a href="#lancar" style="height: 44px; border-radius: 999px; background: #0a0a0a; color: #ffffff; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Lançar</a>
+    <nav aria-label="Navegação principal" style="display: flex; flex-direction: column; gap: 4px;">
+      <a href="WebMes.dc.html" class="nav on" aria-current="page"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>Mês</a>
+      <a href="WebAno.dc.html" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"></rect><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"></rect></svg>Ano</a>
+      <a href="WebEconomia.dc.html" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="13" rx="2.5"></rect><path d="M7 6.5V5a1.5 1.5 0 0 1 1.5-1.5h7A1.5 1.5 0 0 1 17 5v1.5"></path><circle cx="12" cy="13" r="2.5"></circle></svg>Economia</a>
+      <a href="WebResumo.dc.html" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"></path></svg>Resumo</a>
+    </nav>
+    <nav aria-label="Conta" style="margin-top: auto; display: flex; flex-direction: column; gap: 4px; padding-top: 16px; border-top: 1px solid #efefef;">
+      <a href="#ajustes" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"></path></svg>Ajustes</a>
+      <a href="WebLogin.dc.html" class="nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4.5H5.5a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1H10M14.5 8l4 4-4 4M18.5 12H9"></path></svg>Sair</a>
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px clamp(16px, 2.5vw, 36px) 40px; display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 4px;">
+        <button type="button" class="ibtn" aria-label="Mês anterior: setembro"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 6-6 6 6 6"></path></svg></button>
+        <h1 style="margin: 0; font-size: 26px; font-weight: 700; min-width: 220px; text-align: center;">Outubro de 2026</h1>
+        <button type="button" class="ibtn" aria-label="Próximo mês: novembro"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6"></path></svg></button>
+        <span style="font-size: 13px; color: #6b6b6b; margin-left: 8px;">começa com R$ 635,08</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <div style="display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; color: #6b6b6b;">
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-neg"></span>negativo</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-red"></span>até 1.000</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-yel"></span>até 2.000</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-grn"></span>até 4.000</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-dgr"></span>acima</span>
+        </div>
+        <button type="button" class="ibtn" aria-label="Ocultar valores"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+      <section aria-label="Calendário do mês" style="flex: 999 1 560px; min-width: 0; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; font-size: 12px; font-weight: 600; color: #6b6b6b; padding: 0 4px;">
+          <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px;">
+          <sc-for list="{{cells}}" as="c" hint-placeholder-count="35">
+            <button type="button" class="{{c.cls}}" onClick="{{c.pick}}" aria-label="{{c.label}}" aria-pressed="{{c.on}}">
+              <span class="n">{{c.d}}</span>
+              <span class="fl"><span class="f-in">{{c.e}}</span><span class="f-out">{{c.s}}</span><span class="f-dia">{{c.di}}</span></span>
+              <span class="{{c.chipCls}}">{{c.sal}}</span>
+            </button>
+          </sc-for>
+        </div>
+      </section>
+
+      <section aria-label="Dia selecionado" style="flex: 1 1 340px; min-width: 0; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
+          <div style="display: flex; flex-direction: column;">
+            <span style="font-size: 13px; font-weight: 600; color: #6b6b6b;">{{selWeek}}</span>
+            <h2 style="margin: 0; font-size: 22px; line-height: 1.3; font-weight: 700;">{{selTitle}}</h2>
+          </div>
+          <span class="{{selChip}}" style="font-size: 14px; padding: 4px 10px;">{{selSal}}</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 12px; border-radius: 12px; background: #f5f5f5;">
+          <div style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: #6b6b6b;">Entrou</span><span style="font-weight: 700; color: #15803d;">{{selE}}</span></div>
+          <div style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: #6b6b6b;">Saiu</span><span style="font-weight: 700; color: #dc2626;">{{selS}}</span></div>
+          <div style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: #6b6b6b;">Diário</span><span style="font-weight: 700; color: #dc2626;">{{selD}}</span></div>
+        </div>
+
+        <form id="lancar" aria-label="Novo lançamento" style="display: flex; flex-direction: column; gap: 12px;">
+          <div role="group" aria-label="Tipo de lançamento" style="display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: #f0f0f0;">
+            <sc-for list="{{tipos}}" as="t" hint-placeholder-count="3">
+              <button type="button" class="{{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.pick}}">{{t.label}}</button>
+            </sc-for>
+          </div>
+          <label style="display: flex; align-items: center; gap: 8px; height: 56px; padding: 0 14px; border: 1px solid #8a8a8a; border-radius: 12px;">
+            <span style="font-size: 16px; font-weight: 600; color: #6b6b6b;">R$</span>
+            <input inputmode="decimal" placeholder="0,00" aria-label="Valor em reais" style="flex: 1; min-width: 0; border: 0; font: inherit; font-size: 24px; font-weight: 700; color: {{valColor}}; background: transparent; outline: none;">
+          </label>
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px;">
+            <label style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; font-weight: 600;">Categoria</span>
+              <select style="height: 44px; padding: 0 10px; border: 1px solid #8a8a8a; border-radius: 10px; font: inherit; color: #0a0a0a; background: #ffffff; min-width: 0;"><sc-for list="{{cats}}" as="c" hint-placeholder-count="5"><option>{{c}}</option></sc-for></select></label>
+            <label style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; font-weight: 600;">Descrição</span>
+              <input placeholder="Opcional" style="height: 44px; box-sizing: border-box; width: 100%; padding: 0 12px; border: 1px solid #8a8a8a; border-radius: 10px; font: inherit; color: #0a0a0a; background: #ffffff;"></label>
+          </div>
+          <div style="display: flex; flex-direction: column; border: 1px solid #e5e5e5; border-radius: 12px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 6px 6px 14px;">
+              <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">Parcelas</span><span style="font-size: 12px; color: #6b6b6b;">{{parcHint}}</span></span>
+              <span style="display: flex; align-items: center; gap: 2px; flex: none;">
+                <button type="button" aria-label="Menos uma parcela" onClick="{{parcDown}}" style="width: 36px; height: 36px; border: 1px solid #d4d4d4; border-radius: 999px; background: #ffffff; font: inherit; font-size: 17px; color: #0a0a0a; cursor: pointer;">−</button>
+                <span aria-live="polite" style="min-width: 36px; text-align: center; font-weight: 700;">{{parcTxt}}</span>
+                <button type="button" aria-label="Mais uma parcela" onClick="{{parcUp}}" style="width: 36px; height: 36px; border: 1px solid #d4d4d4; border-radius: 999px; background: #ffffff; font: inherit; font-size: 17px; color: #0a0a0a; cursor: pointer;">+</button>
+              </span>
+            </div>
+            <button type="button" role="switch" aria-checked="{{rep}}" onClick="{{toggleRep}}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 6px 14px; border: 0; border-top: 1px solid #efefef; background: transparent; font: inherit; color: #0a0a0a; text-align: left; cursor: pointer; border-radius: 0 0 12px 12px;">
+              <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">Repete todo mês</span><span style="font-size: 12px; color: #6b6b6b;">{{repHint}}</span></span>
+              <span style="flex: none; width: 46px; height: 28px; border-radius: 999px; background: {{repBg}}; position: relative;"><span style="position: absolute; top: 3px; left: {{repX}}; width: 22px; height: 22px; border-radius: 999px; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,.25);"></span></span>
+            </button>
+          </div>
+          <button type="button" style="height: 46px; border: 0; border-radius: 999px; background: #0a0a0a; color: #ffffff; font: inherit; font-weight: 600; cursor: pointer;">Adicionar {{btnLabel}}</button>
+        </form>
+
+        <div style="display: flex; flex-direction: column; border-top: 1px solid #e5e5e5; padding-top: 4px;">
+          <h3 style="margin: 10px 0 2px; font-size: 15px; font-weight: 600;">Entradas e saídas do dia</h3>
+          <sc-if value="{{hasItems}}" hint-placeholder-val="{{true}}">
+            <sc-for list="{{items}}" as="it" hint-placeholder-count="4">
+              <div class="row">
+                <span class="{{it.icoCls}}" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{it.path}}"></path></svg></span>
+                <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-weight: 600;">{{it.t}}</span><span style="font-size: 12px; color: #6b6b6b;">{{it.m}}</span></span>
+                <span class="{{it.vCls}}">{{it.v}}</span>
+              </div>
+            </sc-for>
+          </sc-if>
+          <sc-if value="{{noItems}}" hint-placeholder-val="{{false}}">
+            <p style="margin: 8px 0; color: #6b6b6b;">Nada lançado neste dia.</p>
+          </sc-if>
+        </div>
+      </section>
+    </div>
+
+    <section aria-label="Dados gerais" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 0;">
+      <div class="met" style="flex: 1 1 200px;"><span style="font-size: 13px; color: #6b6b6b;">Performance do mês</span><span style="font-size: 28px; line-height: 1.2; font-weight: 700; color: #15803d;">+ R$ 81,89</span></div>
+      <div class="met" style="flex: 1 1 140px;"><span style="font-size: 13px; color: #6b6b6b;">Entradas</span><span style="font-size: 17px; font-weight: 700;">R$ 18.501,50</span></div>
+      <div class="met" style="flex: 1 1 140px;"><span style="font-size: 13px; color: #6b6b6b;">Saídas</span><span style="font-size: 17px; font-weight: 700;">R$ 12.643,47</span></div>
+      <div class="met" style="flex: 1 1 140px;"><span style="font-size: 13px; color: #6b6b6b;">Diário</span><span style="font-size: 17px; font-weight: 700;">R$ 5.776,14</span></div>
+      <div class="met" style="flex: 1 1 140px;"><span style="font-size: 13px; color: #6b6b6b;">Saída total</span><span style="font-size: 17px; font-weight: 700;">R$ 18.419,61</span></div>
+      <a href="WebEconomia.dc.html" class="met" style="flex: 1 1 160px; text-decoration: none; color: #0a0a0a;"><span style="font-size: 13px; color: #6b6b6b;">Guardado no mês</span><span style="font-size: 17px; font-weight: 700;">+ R$ 1.350,00 ›</span></a>
+    </section>
+    <span style="align-self: flex-start; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #ebebeb;">Dados de exemplo</span>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: 4, tipo: 'diario', parc: 1, rep: false }; }
+  renderVals() {
+    var self = this, sel = this.state.sel, cur = this.state.tipo, parc = this.state.parc, rep = this.state.rep;
+    var mesesN = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    var lastP = new Date(2026, 9 + parc - 1, 1);
+    var dd = (sel < 10 ? '0' : '') + sel;
+    var ent = {3:317,4:6450,8:7500,12:500,15:100,18:1000,19:934.5,21:1000,24:150,29:500,30:50};
+    var sai = {2:200,4:3025.7,8:7831.54,10:46.73,18:200,19:1339.5};
+    var dia = [0,12.29,437,100,799.5,640.58,336.29,134,94,17,275.06,583.57,356.74,122.9,10,0,159.9,11,467.18,107,119.49,0,84.7,150,214.75,238.2,142,100,62.99,0,0];
+    var n2 = function (v) { return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+    var zone = function (v) { return v < 0 ? 'z-neg' : v < 1000 ? 'z-red' : v < 2000 ? 'z-yel' : v < 4000 ? 'z-grn' : 'z-dgr'; };
+    var wk = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+    var saldo = 635.08, cells = [], i, d, saldos = [];
+    for (i = 0; i < 4; i++) cells.push({ d: '', e: '', s: '', di: '', sal: '', cls: 'cell blank', chipCls: 'chip', label: '', on: 'false', pick: function () {} });
+    for (d = 1; d <= 31; d++) {
+      var e = ent[d] || 0, s = sai[d] || 0, di = dia[d - 1];
+      saldo += e - s - di; saldos.push(saldo);
+      (function (day, e, s, di, sv) {
+        cells.push({ d: String(day), e: e ? '+ ' + n2(e) : '', s: s ? '− ' + n2(s) : '', di: di ? 'diário ' + n2(di) : '',
+          sal: n2(sv), chipCls: 'chip ' + zone(sv), on: day === sel ? 'true' : 'false',
+          cls: 'cell' + (day === 15 ? ' today' : '') + (day === sel ? ' sel' : ''),
+          label: day + ' de outubro, saldo R$ ' + n2(sv),
+          pick: function () { self.setState({ sel: day }); } });
+      })(d, e, s, di, saldo);
+    }
+    var se = ent[sel] || 0, ss = sai[sel] || 0, sd = dia[sel - 1], sv = saldos[sel - 1];
+    var up = 'M12 19V5M6 11l6-6 6 6', down = 'M12 5v14M6 13l6 6 6-6';
+    var items;
+    if (sel === 4) {
+      items = [{ t: 'Salário', m: 'Entrada · Salário / pró-labore', v: 6450, inn: true }, { t: 'Aluguel', m: 'Saída · Moradia', v: 1800 },
+        { t: 'Fatura do cartão', m: 'Saída · Fatura do cartão', v: 1225.7 }, { t: 'Combustível', m: 'Diário · Transporte', v: 100 }];
+    } else {
+      items = [];
+      if (se) items.push({ t: 'Entrada', m: 'Entrada · exemplo', v: se, inn: true });
+      if (ss) items.push({ t: 'Saída', m: 'Saída · exemplo', v: ss });
+      if (sd) items.push({ t: 'Gastos do dia', m: 'Diário · exemplo', v: sd });
+    }
+    items = items.map(function (it) { return { t: it.t, m: it.m, v: (it.inn ? '+ R$ ' : '− R$ ') + n2(it.v), vCls: it.inn ? 'v-in' : 'v-out', icoCls: it.inn ? 'ico in' : 'ico out', path: it.inn ? up : down }; });
+    var info = {
+      entrada: { btn: 'entrada', cats: ['Salário / pró-labore', 'Renda extra', 'Resgate · Reserva de emergência', 'Resgate · Viagem'] },
+      saida: { btn: 'saída', cats: ['Moradia', 'Fatura do cartão', 'Contas e boletos', 'Aporte · Reserva de emergência', 'Aporte · Investimentos', 'Aporte · Viagem'] },
+      diario: { btn: 'ao diário', cats: ['Transporte', 'Mercado', 'Alimentação', 'Saúde', 'Lazer'] }
+    };
+    var defs = [['entrada', 'Entrada'], ['saida', 'Saída'], ['diario', 'Diário']];
+    return {
+      parcTxt: parc + '×',
+      parcHint: parc === 1 ? 'À vista, só neste dia' : 'Dividido em ' + parc + '; a última cai em ' + dd + ' de ' + mesesN[lastP.getMonth()] + (lastP.getFullYear() > 2026 ? ' de ' + lastP.getFullYear() : ''),
+      parcDown: function () { self.setState({ parc: Math.max(1, parc - 1) }); },
+      parcUp: function () { self.setState({ parc: Math.min(48, parc + 1) }); },
+      rep: rep ? 'true' : 'false', repBg: rep ? '#0a0a0a' : '#c8c8c8', repX: rep ? '21px' : '3px',
+      repHint: rep ? 'Cria um lançamento no dia ' + sel + ' de cada mês. Dá para mover ou apagar cada um depois.' : 'Desligado: lance cada mês quando souber a data.',
+      toggleRep: function () { self.setState({ rep: !rep }); },
+      cells: cells, items: items, hasItems: items.length > 0, noItems: items.length === 0,
+      selTitle: sel + ' de outubro', selWeek: wk[new Date(2026, 9, sel).getDay()] + (sel === 15 ? ' · hoje' : ''),
+      selSal: 'R$ ' + n2(sv), selChip: 'chip ' + zone(sv), selE: n2(se), selS: n2(ss), selD: n2(sd),
+      btnLabel: info[cur].btn, cats: info[cur].cats, valColor: cur === 'entrada' ? '#15803d' : '#dc2626',
+      tipos: defs.map(function (t) { return { label: t[1], on: t[0] === cur ? 'true' : 'false', cls: t[0] === cur ? 'pill on' : 'pill', pick: function () { self.setState({ tipo: t[0] }); } }; })
+    };
+  }
+}
+</script>
+</body>
+</html>

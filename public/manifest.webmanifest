@@ -1,0 +1,13 @@
+{
+  "name": "Controllo",
+  "short_name": "Controllo",
+  "description": "O saldo de cada dia, hoje e nos meses que vêm.",
+  "lang": "pt-BR",
+  "start_url": "/mes",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "/brand/controllo-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

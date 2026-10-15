@@ -1,0 +1,8 @@
+<!-- Recuperação de senha. O link volta para /auth/confirmar com token_hash e leva à tela Nova senha. -->
+<div style="font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; color: #0a0a0a; max-width: 480px; margin: 0 auto; padding: 32px 24px; font-size: 14px; line-height: 1.5;">
+  <h1 style="font-size: 22px; margin: 0 0 12px;">Crie uma nova senha</h1>
+  <p style="margin: 0 0 24px; color: #6b6b6b;">Recebemos um pedido para trocar a senha da sua conta no Controllo.</p>
+  <a href="{{ .SiteURL }}/auth/confirmar?token_hash={{ .TokenHash }}&type=recovery&next=/nova-senha"
+     style="display: inline-block; background: #0a0a0a; color: #ffffff; text-decoration: none; font-weight: 600; padding: 14px 28px; border-radius: 999px;">Criar nova senha</a>
+  <p style="margin: 24px 0 0; color: #6b6b6b; font-size: 12px;">Se não foi você, ignore este e-mail. Sua senha continua a mesma.</p>
+</div>

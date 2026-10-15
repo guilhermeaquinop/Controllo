@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ano</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0a0a0a}a:hover{color:#404040}
+button:focus-visible,a:focus-visible{outline:2px solid #0a0a0a;outline-offset:2px}
+.mcard{display:flex;flex-direction:column;gap:6px;padding:10px 8px 9px;border-radius:12px;background:#ffffff;border:1px solid #e5e5e5;text-decoration:none;color:#0a0a0a;min-width:0}
+.mcard.cur{border:2px solid #0a0a0a;padding:9px 7px 8px}
+.mgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
+.d{aspect-ratio:1/1;border-radius:3px;max-width:100%}
+.d.blank{visibility:hidden}
+.d.fut{background:#ececec}
+.d.prev{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85)}
+.d.today{outline:2px solid #0a0a0a;outline-offset:1px}
+.z-neg{background:#a33a32}.z-red{background:#ec8b84}.z-yel{background:#f2d46b}.z-grn{background:#a3dcae}.z-dgr{background:#5bab72}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.p-in{color:#15803d}.p-out{color:#dc2626}.p-none{color:#8a8a8a}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#6b6b6b;font-size:12px;font-weight:500}
+.tab .ind{width:56px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+.tab.on{color:#0a0a0a;font-weight:600}
+.tab.on .ind{background:#ebebeb}
+.ibtn{width:44px;height:44px;border:0;background:transparent;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0a0a0a;cursor:pointer;text-decoration:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 1300px; box-sizing: border-box; background: #f5f5f5; color: #0a0a0a; font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.5; font-variant-numeric: tabular-nums; display: flex; flex-direction: column;">
+
+  <header style="height: 56px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 4px 0 16px; background: #ffffff; border-bottom: 1px solid #e5e5e5;">
+    <span style="font-size: 18px; font-weight: 700;">Ano</span>
+    <div style="display: flex;">
+      <button type="button" class="ibtn" aria-label="Ocultar valores"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+      <a href="Ajustes.dc.html" class="ibtn" aria-label="Ajustes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"></path></svg></a>
+    </div>
+  </header>
+
+  <main style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px 16px 24px;">
+    <div style="display: grid; grid-template-columns: 44px 1fr 44px; align-items: center;">
+      <button type="button" class="ibtn" aria-label="Ano anterior: 2025"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 6-6 6 6 6"></path></svg></button>
+      <h1 style="margin: 0; text-align: center; font-size: 22px; font-weight: 700;">2026</h1>
+      <button type="button" class="ibtn" aria-label="Próximo ano: 2027"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6"></path></svg></button>
+    </div>
+
+    <section aria-label="Totais do ano" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 13px; color: #6b6b6b;">Performance de janeiro a outubro</span>
+        <span class="{{yearPerfCls}}" style="font-size: 30px; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em;">{{yearPerf}}</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding-top: 12px; border-top: 1px solid #efefef;">
+        <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 12px; color: #6b6b6b;">Entradas</span><span style="font-size: 14px; font-weight: 700;">{{yearIn}}</span></div>
+        <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 12px; color: #6b6b6b;">Saída total</span><span style="font-size: 14px; font-weight: 700;">{{yearOut}}</span></div>
+        <div style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 12px; color: #6b6b6b;">Dias abaixo de 1.000</span><span style="font-size: 14px; font-weight: 700;">{{redDays}}</span></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: #f5f5f5;">
+        <span style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: #6b6b6b;">Saldo previsto em 31/12</span><span class="{{endCls}}" style="font-size: 18px; font-weight: 700;">{{endSaldo}}</span></span>
+        <span style="font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #ffffff; border: 1px dashed #8a8a8a;">previsão</span>
+      </div>
+      <button type="button" role="switch" aria-checked="{{incl}}" onClick="{{toggle}}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 0; border: 0; background: transparent; font: inherit; color: #0a0a0a; text-align: left; cursor: pointer;">
+        <span style="display: flex; flex-direction: column;"><span style="font-weight: 600;">Contar o gasto diário na previsão</span><span style="font-size: 12px; color: #6b6b6b;">usa sua média: {{avgTxt}} por dia</span></span>
+        <span style="flex: none; width: 46px; height: 28px; border-radius: 999px; background: {{trackBg}}; position: relative;"><span style="position: absolute; top: 3px; left: {{knobX}}; width: 22px; height: 22px; border-radius: 999px; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,.25);"></span></span>
+      </button>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+      <sc-for list="{{months}}" as="m" hint-placeholder-count="12">
+        <a href="Main.dc.html" class="{{m.cls}}" aria-label="{{m.label}}">
+          <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 4px;"><span style="font-size: 13px; font-weight: 700;">{{m.nome}}</span><span style="font-size: 10px; font-weight: 600; color: #6b6b6b;">{{m.tag}}</span></span>
+          <span class="mgrid">
+            <sc-for list="{{m.cells}}" as="c" hint-placeholder-count="35"><span class="{{c}}"></span></sc-for>
+          </span>
+          <span class="{{m.perfCls}}" style="font-size: 12px; font-weight: 700;">{{m.perf}}</span>
+        </a>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; color: #6b6b6b;">
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-neg"></span>negativo</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-red"></span>até 1.000</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-yel"></span>até 2.000</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-grn"></span>até 4.000</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-dgr"></span>acima</span>
+      <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-grn" style="box-shadow: inset 0 0 0 2px rgba(255,255,255,.85);"></span>previsto (anel branco)</span>
+    </div>
+    <span style="font-size: 12px; color: #6b6b6b;">Cada quadrado é o saldo no fim do dia. Depois de hoje, a cor é a previsão: vem dos lançamentos futuros e recorrentes (salário, aluguel, fatura), e do gasto diário médio se a opção acima estiver ligada. O valor embaixo do mês é a performance.</span>
+  </main>
+
+  <nav aria-label="Navegação principal" style="height: 64px; flex: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: #ffffff; border-top: 1px solid #e5e5e5;">
+    <a href="Main.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg></span>Mês</a>
+    <a href="Ano.dc.html" class="tab on" aria-current="page"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="3.5" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="3.5" y="16" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="16" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="16" width="4.5" height="4.5" rx="1"></rect></svg></span>Ano</a>
+    <a href="Dia.dc.html" class="tab" style="color: #0a0a0a; font-weight: 600;"><span style="width: 52px; height: 52px; margin-top: -22px; border-radius: 999px; background: #0a0a0a; color: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 5px #ffffff;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Lançar</a>
+    <a href="Economia.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="13" rx="2.5"></rect><path d="M7 6.5V5a1.5 1.5 0 0 1 1.5-1.5h7A1.5 1.5 0 0 1 17 5v1.5"></path><circle cx="12" cy="13" r="2.5"></circle></svg></span>Economia</a>
+    <a href="Resumo.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"></path></svg></span>Resumo</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { incl: true }; }
+  renderVals() {
+    var self = this, incl = this.state.incl, avg = 186.33;
+    var seed = 7;
+    function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+    var nomes = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+    var longos = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    var y = 2026, m, d, flows = [], ins = [], outs = [];
+    for (m = 0; m < 12; m++) { flows.push([]); ins.push(0); outs.push(0); }
+    /* jan a set: dados de exemplo gerados */
+    for (m = 0; m < 9; m++) {
+      var dim = new Date(y, m + 1, 0).getDate();
+      for (d = 1; d <= dim; d++) {
+        var e = 0, s = 0;
+        if (d === 5) e += 6450;
+        if (d === 20 && rnd() > 0.4) e += Math.round(300 + rnd() * 1400);
+        if (d === 10) s += 1800;
+        if (d === 12) s += Math.round(900 + rnd() * 1500);
+        if (d === 15) s += Math.round(150 + rnd() * 350);
+        if (rnd() > 0.15) s += Math.round(rnd() * 240);
+        flows[m].push(e - s); ins[m] += e; outs[m] += s;
+      }
+    }
+    /* outubro: o mesmo da tela Mês (primeiro mês da planilha) */
+    var ent = {3:317,4:6450,8:7500,12:500,15:100,18:1000,19:934.5,21:1000,24:150,29:500,30:50};
+    var sai = {2:200,4:3025.7,8:7831.54,10:46.73,18:200,19:1339.5};
+    var dia = [0,12.29,437,100,799.5,640.58,336.29,134,94,17,275.06,583.57,356.74,122.9,10,0,159.9,11,467.18,107,119.49,0,84.7,150,214.75,238.2,142,100,62.99,0,0];
+    for (d = 1; d <= 31; d++) { var ee = ent[d] || 0, ss = (sai[d] || 0) + dia[d - 1]; flows[9].push(ee - ss); ins[9] += ee; outs[9] += ss; }
+    /* nov e dez: só o que já está agendado ou se repete todo mês, mais a média do diário se a opção estiver ligada */
+    var fut = [
+      { e: { 5: 6450, 18: 1200 }, s: { 10: 1800, 12: 1650, 15: 182.4, 20: 46.73, 25: 119.9 } },
+      { e: { 5: 6450 }, s: { 10: 1800, 12: 2100, 15: 190, 20: 46.73, 22: 600, 25: 119.9 } }
+    ];
+    for (m = 10; m < 12; m++) {
+      var f = fut[m - 10], dm = new Date(y, m + 1, 0).getDate();
+      for (d = 1; d <= dm; d++) {
+        var fe = f.e[d] || 0, fs = (f.s[d] || 0) + (incl ? avg : 0);
+        flows[m].push(fe - fs); ins[m] += fe; outs[m] += fs;
+      }
+    }
+    var sumBefore = 0; for (m = 0; m < 9; m++) flows[m].forEach(function (f) { sumBefore += f; });
+    var saldo = 635.08 - sumBefore, redDays = 0;
+    var fmt = function (v) { return 'R$ ' + Math.abs(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+    var short = function (v) { return (v >= 0 ? '+' : '−') + ' ' + Math.round(Math.abs(v)).toLocaleString('pt-BR'); };
+    var months = [];
+    for (m = 0; m < 12; m++) {
+      var off = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate(), cells = [], i;
+      for (i = 0; i < off; i++) cells.push('d blank');
+      for (d = 1; d <= days; d++) {
+        saldo += flows[m][d - 1];
+        var future = m > 9 || (m === 9 && d > 15);
+        if (saldo < 1000 && !future) redDays++;
+        var z = saldo < 0 ? 'z-neg' : saldo < 1000 ? 'z-red' : saldo < 2000 ? 'z-yel' : saldo < 4000 ? 'z-grn' : 'z-dgr';
+        cells.push('d ' + z + (m === 9 && d === 15 ? ' today' : '') + (future ? ' prev' : ''));
+      }
+      var perf = ins[m] - outs[m], prev = m > 9;
+      months.push({ nome: nomes[m], tag: prev ? 'previsto' : '', cells: cells, cls: 'mcard' + (m === 9 ? ' cur' : ''),
+        perf: short(perf), perfCls: perf >= 0 ? 'p-in' : 'p-out',
+        label: longos[m] + (prev ? ', previsão de performance ' : ', performance ') + (perf >= 0 ? 'positiva de ' : 'negativa de ') + fmt(perf) });
+    }
+    var tin = 0, tout = 0; for (m = 0; m < 10; m++) { tin += ins[m]; tout += outs[m]; }
+    var yp = tin - tout;
+    return { months: months, yearIn: fmt(tin), yearOut: fmt(tout), yearPerf: (yp >= 0 ? '+ ' : '− ') + fmt(yp),
+      yearPerfCls: yp >= 0 ? 'p-in' : 'p-out', redDays: String(redDays),
+      endSaldo: (saldo < 0 ? '− ' : '') + fmt(saldo), endCls: saldo < 0 ? 'p-out' : '',
+      incl: incl ? 'true' : 'false', trackBg: incl ? '#0a0a0a' : '#c8c8c8', knobX: incl ? '21px' : '3px',
+      avgTxt: 'R$ 186,33', toggle: function () { self.setState({ incl: !incl }); } };
+  }
+}
+</script>
+</body>
+</html>

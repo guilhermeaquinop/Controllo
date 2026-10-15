@@ -1,0 +1,8 @@
+<!-- Confirmação de cadastro. O link volta para /auth/confirmar com token_hash (funciona em qualquer aparelho). -->
+<div style="font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; color: #0a0a0a; max-width: 480px; margin: 0 auto; padding: 32px 24px; font-size: 14px; line-height: 1.5;">
+  <h1 style="font-size: 22px; margin: 0 0 12px;">Confirme sua conta</h1>
+  <p style="margin: 0 0 24px; color: #6b6b6b;">Toque no botão para confirmar o e-mail e entrar no Controllo.</p>
+  <a href="{{ .SiteURL }}/auth/confirmar?token_hash={{ .TokenHash }}&type=email&next=/mes"
+     style="display: inline-block; background: #0a0a0a; color: #ffffff; text-decoration: none; font-weight: 600; padding: 14px 28px; border-radius: 999px;">Confirmar e-mail</a>
+  <p style="margin: 24px 0 0; color: #6b6b6b; font-size: 12px;">Se você não criou uma conta no Controllo, ignore este e-mail.</p>
+</div>

@@ -1,0 +1,78 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Controllo</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--surface-muted); color:var(--ink); font-family:var(--font-sans); overflow:hidden; }
+  .cover { position:relative; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .slab { fill:var(--primary); rx:var(--radius-sheet); }
+  .bar { stroke:var(--on-primary); stroke-width:20px; stroke-linecap:round; fill:none; }
+  .tile { rx:var(--radius-sm); }
+  .zn { fill:var(--zone-negative); }
+  .zl { fill:var(--zone-low); }
+  .zm { fill:var(--zone-mid); }
+  .zo { fill:var(--zone-ok); }
+  .zh { fill:var(--zone-high); }
+  .words { position:absolute; left:var(--space-6); bottom:var(--space-6); max-width:440px; }
+  .name { margin:0; font-size:80px; line-height:.92; font-weight:700; letter-spacing:-.03em; color:var(--ink); }
+  .tag { margin:var(--space-3) 0 0 4px; font-size:14px; line-height:20px; color:var(--ink-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      primary slab 144×176 (the mark, scaled 1.5×, the "ll" as two on-primary bars) · the five zone-* colours as a month of 31 tiles · together ≈ 26% of 960×288
+  arrangement one tall slab with a month calendar beside it, tops and bottoms on one line, space-4 gutter; four empty cells before day 1, as the real calendar starts on a Thursday
+  pattern     tiles, from "um ano inteiro de quadradinhos coloridos" in the README: the product's own calendar, 7 columns at a 36px pitch (32px tile + space-1 gap)
+  scales      tile 32 = space-8, gap space-1, gutter space-4; corners radius-sm on tiles, radius-sheet on the slab; bars 20px with round caps, as the mark's 13 at 1.5×
+-->
+<rect class="slab" x="16" y="52" width="144" height="176" rx="24"/>
+<path class="bar" d="M73 137V173"/>
+<path class="bar" d="M103 107V173"/>
+<rect class="zl tile" x="336" y="52" width="32" height="32" rx="6"/>
+<rect class="zm tile" x="372" y="52" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="408" y="52" width="32" height="32" rx="6"/>
+<rect class="zh tile" x="192" y="88" width="32" height="32" rx="6"/>
+<rect class="zh tile" x="228" y="88" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="264" y="88" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="300" y="88" width="32" height="32" rx="6"/>
+<rect class="zm tile" x="336" y="88" width="32" height="32" rx="6"/>
+<rect class="zm tile" x="372" y="88" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="408" y="88" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="192" y="124" width="32" height="32" rx="6"/>
+<rect class="zh tile" x="228" y="124" width="32" height="32" rx="6"/>
+<rect class="zh tile" x="264" y="124" width="32" height="32" rx="6"/>
+<rect class="zh tile" x="300" y="124" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="336" y="124" width="32" height="32" rx="6"/>
+<rect class="zm tile" x="372" y="124" width="32" height="32" rx="6"/>
+<rect class="zl tile" x="408" y="124" width="32" height="32" rx="6"/>
+<rect class="zl tile" x="192" y="160" width="32" height="32" rx="6"/>
+<rect class="zn tile" x="228" y="160" width="32" height="32" rx="6"/>
+<rect class="zl tile" x="264" y="160" width="32" height="32" rx="6"/>
+<rect class="zm tile" x="300" y="160" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="336" y="160" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="372" y="160" width="32" height="32" rx="6"/>
+<rect class="zh tile" x="408" y="160" width="32" height="32" rx="6"/>
+<rect class="zh tile" x="192" y="196" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="228" y="196" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="264" y="196" width="32" height="32" rx="6"/>
+<rect class="zm tile" x="300" y="196" width="32" height="32" rx="6"/>
+<rect class="zm tile" x="336" y="196" width="32" height="32" rx="6"/>
+<rect class="zo tile" x="372" y="196" width="32" height="32" rx="6"/>
+<rect class="zh tile" x="408" y="196" width="32" height="32" rx="6"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Controllo</h1>
+<p class="tag">O saldo de cada dia, hoje e nos meses que vêm.</p>
+</div>
+</div>
+</body>
+</html>

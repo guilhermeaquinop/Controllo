@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Resumo do mês</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0a0a0a}a:hover{color:#404040}
+button:focus-visible,a:focus-visible{outline:2px solid #0a0a0a;outline-offset:2px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#6b6b6b;font-size:12px;font-weight:500}
+.tab .ind{width:56px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+.tab.on{color:#0a0a0a;font-weight:600}
+.tab.on .ind{background:#ebebeb}
+.ibtn{width:44px;height:44px;border:0;background:transparent;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0a0a0a;cursor:pointer;text-decoration:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 1220px; box-sizing: border-box; background: #f5f5f5; color: #0a0a0a; font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.5; font-variant-numeric: tabular-nums; display: flex; flex-direction: column;">
+
+  <header style="height: 56px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 4px 0 16px; background: #ffffff; border-bottom: 1px solid #e5e5e5;">
+    <span style="font-size: 18px; font-weight: 700;">Resumo</span>
+    <div style="display: flex;">
+      <button type="button" class="ibtn" aria-label="Ocultar valores"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+      <a href="Ajustes.dc.html" class="ibtn" aria-label="Ajustes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"></path></svg></a>
+    </div>
+  </header>
+
+  <main style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px 16px 24px;">
+    <div style="display: grid; grid-template-columns: 44px 1fr 44px; align-items: center;">
+      <button type="button" class="ibtn" aria-label="Mês anterior: setembro"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 6-6 6 6 6"></path></svg></button>
+      <h1 style="margin: 0; text-align: center; font-size: 18px; font-weight: 700;">outubro de 2026</h1>
+      <button type="button" class="ibtn" aria-label="Próximo mês: novembro"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6"></path></svg></button>
+    </div>
+
+    <section aria-label="Performance" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 13px; color: #6b6b6b;">Performance</span>
+        <span style="font-size: 40px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; color: #15803d;">+ R$ 81,89</span>
+        <span style="font-size: 12px; color: #6b6b6b;">R$ 18.501,50 de entradas menos R$ 18.419,61 de saída total</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; padding-top: 14px; border-top: 1px solid #efefef;">
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 13px; color: #6b6b6b;">Entradas</span><span style="font-size: 18px; font-weight: 700; color: #15803d;">R$ 18.501,50</span></div>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 13px; color: #6b6b6b;">Saídas</span><span style="font-size: 18px; font-weight: 700; color: #dc2626;">R$ 12.643,47</span></div>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 13px; color: #6b6b6b;">Diário</span><span style="font-size: 18px; font-weight: 700; color: #dc2626;">R$ 5.776,14</span><span style="font-size: 12px; color: #6b6b6b;">média R$ 222,16 em 26 dias</span></div>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 13px; color: #6b6b6b;">Saldo em 31/10</span><span style="font-size: 18px; font-weight: 700;">R$ 716,97</span><span style="font-size: 12px; color: #6b6b6b;">começou com R$ 635,08</span></div>
+      </div>
+    </section>
+
+    <section aria-label="Saldo ao longo do mês" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+        <h2 style="margin: 0; font-size: 16px; line-height: 1.4; font-weight: 600;">Saldo ao longo do mês</h2>
+        <span style="font-size: 12px; color: #6b6b6b;">menor: R$ 129 em 20/10</span>
+      </div>
+      <svg viewBox="0 0 316 150" width="316" height="150" role="img" aria-label="Saldo diário de outubro: sobe para R$ 3.627 no dia 4, cai até R$ 129 no dia 20 e fecha em R$ 717" style="display: block; overflow: visible;">
+        <path d="{{area}}" fill="#f0f0f0"></path>
+        <line x1="0" x2="316" y1="{{limY}}" y2="{{limY}}" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3 4"></line>
+        <text x="316" y="{{limLabelY}}" text-anchor="end" font-size="11" fill="#dc2626" font-weight="600" font-family="Montserrat, system-ui, sans-serif">faixa vermelha: 1.000</text>
+        <path d="{{line}}" fill="none" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        <line x1="0" x2="316" y1="130" y2="130" stroke="#e5e5e5" stroke-width="1"></line>
+        <circle cx="{{todayX}}" cy="{{todayY}}" r="5" fill="#ffffff" stroke="#0a0a0a" stroke-width="2.5"></circle>
+        <text x="0" y="146" font-size="11" fill="#6b6b6b" font-family="Montserrat, system-ui, sans-serif">01/10</text>
+        <text x="{{todayX}}" y="146" text-anchor="middle" font-size="11" fill="#6b6b6b" font-family="Montserrat, system-ui, sans-serif">hoje</text>
+        <text x="316" y="146" text-anchor="end" font-size="11" fill="#6b6b6b" font-family="Montserrat, system-ui, sans-serif">31/10</text>
+      </svg>
+    </section>
+
+    <section aria-label="Gastos por categoria" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+        <h2 style="margin: 0; font-size: 16px; line-height: 1.4; font-weight: 600;">Para onde foi o dinheiro</h2>
+        <span style="font-size: 12px; color: #6b6b6b;">saídas + diário</span>
+      </div>
+      <sc-for list="{{cats}}" as="c" hint-placeholder-count="9">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div style="display: flex; justify-content: space-between; gap: 12px;">
+            <span style="font-weight: 600;">{{c.nome}} <span style="font-weight: 400; font-size: 12px; color: #6b6b6b;">{{c.pct}}</span></span>
+            <span style="font-weight: 600;">{{c.valor}}</span>
+          </div>
+          <div style="height: 8px; border-radius: 999px; background: #ececec; overflow: hidden;"><div style="height: 100%; border-radius: 999px; background: {{c.color}}; width: {{c.w}};"></div></div>
+        </div>
+      </sc-for>
+      <span style="font-size: 12px; color: #6b6b6b;">Aportes em reservas aparecem em cinza: saem da conta, mas continuam seus.</span>
+      <span style="align-self: flex-start; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #ebebeb;">Dados de exemplo</span>
+    </section>
+  </main>
+
+  <nav aria-label="Navegação principal" style="height: 64px; flex: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: #ffffff; border-top: 1px solid #e5e5e5;">
+    <a href="Main.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg></span>Mês</a>
+    <a href="Ano.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="3.5" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="3.5" y="16" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="16" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="16" width="4.5" height="4.5" rx="1"></rect></svg></span>Ano</a>
+    <a href="Dia.dc.html" class="tab" style="color: #0a0a0a; font-weight: 600;"><span style="width: 52px; height: 52px; margin-top: -22px; border-radius: 999px; background: #0a0a0a; color: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 5px #ffffff;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Lançar</a>
+    <a href="Economia.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="13" rx="2.5"></rect><path d="M7 6.5V5a1.5 1.5 0 0 1 1.5-1.5h7A1.5 1.5 0 0 1 17 5v1.5"></path><circle cx="12" cy="13" r="2.5"></circle></svg></span>Economia</a>
+    <a href="Resumo.dc.html" class="tab on" aria-current="page"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"></path></svg></span>Resumo</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1220}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var ent = {3:317,4:6450,8:7500,12:500,15:100,18:1000,19:934.5,21:1000,24:150,29:500,30:50};
+    var sai = {2:200,4:3025.7,8:7831.54,10:46.73,18:200,19:1339.5};
+    var dia = [0,12.29,437,100,799.5,640.58,336.29,134,94,17,275.06,583.57,356.74,122.9,10,0,159.9,11,467.18,107,119.49,0,84.7,150,214.75,238.2,142,100,62.99,0,0];
+    var s = 635.08, vals = [], d;
+    for (d = 1; d <= 31; d++) { s += (ent[d] || 0) - (sai[d] || 0) - dia[d - 1]; vals.push(s); }
+    var W = 316, top = 8, bottom = 130, max = 4000;
+    var x = function (i) { return (i / 30 * W).toFixed(1); };
+    var y = function (v) { return (bottom - (Math.max(0, v) / max) * (bottom - top)).toFixed(1); };
+    var line = vals.map(function (v, i) { return (i ? 'L' : 'M') + x(i) + ' ' + y(v); }).join(' ');
+    var area = line + ' L' + W + ' ' + bottom + ' L0 ' + bottom + ' Z';
+    var limY = y(1000);
+    var cats = [['Fatura do cartão', 7257.24], ['Mercado', 2210.40], ['Moradia', 1800], ['Reservas (aportes)', 1800, true], ['Contas e boletos', 1786.23],
+      ['Alimentação', 1388.95], ['Transporte', 1104.30], ['Lazer', 682.49], ['Saúde', 390]];
+    var total = 18419.61, top1 = cats[0][1];
+    var fmt = function (v) { return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+    return {
+      line: line, area: area, limY: limY, limLabelY: (Number(limY) - 6).toFixed(1),
+      todayX: x(14), todayY: y(vals[14]),
+      cats: cats.map(function (c) { return { nome: c[0], valor: fmt(c[1]), pct: Math.round(c[1] / total * 100) + '%', w: (c[1] / top1 * 100).toFixed(1) + '%', color: c[2] ? '#a3a3a3' : '#0a0a0a' }; })
+    };
+  }
+}
+</script>
+</body>
+</html>

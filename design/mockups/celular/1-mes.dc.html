@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Mês</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0a0a0a}a:hover{color:#404040}
+button:focus-visible,a:focus-visible{outline:2px solid #0a0a0a;outline-offset:2px}
+.cell{display:flex;flex-direction:column;justify-content:space-between;height:56px;padding:5px 3px 4px;box-sizing:border-box;border-radius:8px;text-decoration:none;color:#0a0a0a;border:1px solid transparent}
+.cell:hover{border-color:#8a8a8a}
+.cell.blank{visibility:hidden}
+.n{font-size:12px;font-weight:600;width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;margin-left:2px}
+.cell.today .n{background:#0a0a0a;color:#ffffff}
+.chip{font-size:10px;font-weight:700;line-height:1;padding:4px 2px;border-radius:6px;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden}
+.z-neg{background:#a33a32;color:#ffffff}
+.z-red{background:#ec8b84;color:#0a0a0a}
+.z-yel{background:#f2d46b;color:#0a0a0a}
+.z-grn{background:#a3dcae;color:#0a0a0a}
+.z-dgr{background:#5bab72;color:#0a0a0a}
+.sw{width:12px;height:12px;border-radius:4px;display:inline-block}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#6b6b6b;font-size:12px;font-weight:500}
+.tab .ind{width:56px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+.tab.on{color:#0a0a0a;font-weight:600}
+.tab.on .ind{background:#ebebeb}
+.ibtn{width:44px;height:44px;border:0;background:transparent;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0a0a0a;cursor:pointer;text-decoration:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 1120px; box-sizing: border-box; background: #f5f5f5; color: #0a0a0a; font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.5; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; position: relative;">
+
+  <header style="height: 56px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 4px 0 16px; background: #ffffff; border-bottom: 1px solid #e5e5e5;">
+    <span style="font-size: 18px; font-weight: 700;">Mês</span>
+    <div style="display: flex;">
+      <button type="button" class="ibtn" aria-label="Ocultar valores"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+      <a href="Ajustes.dc.html" class="ibtn" aria-label="Ajustes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"></path></svg></a>
+    </div>
+  </header>
+
+  <main style="flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px 16px 24px;">
+    <section aria-label="Calendário do mês" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 12px 12px 16px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="display: grid; grid-template-columns: 44px 1fr 44px; align-items: center;">
+        <button type="button" class="ibtn" aria-label="Mês anterior: setembro"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 6-6 6 6 6"></path></svg></button>
+        <div style="text-align: center; display: flex; flex-direction: column;">
+          <h1 style="margin: 0; font-size: 18px; line-height: 1.35; font-weight: 700;">outubro de 2026</h1>
+          <span style="font-size: 12px; color: #6b6b6b;">começa com R$ 635,08</span>
+        </div>
+        <button type="button" class="ibtn" aria-label="Próximo mês: novembro"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6"></path></svg></button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; font-size: 11px; font-weight: 600; color: #6b6b6b; text-align: center;">
+        <span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px;">
+        <sc-for list="{{cells}}" as="c" hint-placeholder-count="35">
+          <a href="Dia.dc.html" class="{{c.cls}}" aria-label="{{c.label}}">
+            <span class="n">{{c.d}}</span>
+            <span class="{{c.chipCls}}">{{c.sal}}</span>
+          </a>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px 12px; padding-top: 4px; font-size: 12px; color: #6b6b6b;">
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-neg"></span>negativo</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-red"></span>até 1.000</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-yel"></span>até 2.000</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-grn"></span>até 4.000</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="sw z-dgr"></span>acima</span>
+      </div>
+    </section>
+
+    <section aria-label="Dados gerais" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+        <h2 style="margin: 0; font-size: 16px; line-height: 1.4; font-weight: 600;">Dados gerais</h2>
+        <a href="Resumo.dc.html" style="font-size: 14px; font-weight: 600;">Ver resumo</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 13px; color: #6b6b6b;">Performance do mês</span>
+        <span style="font-size: 34px; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; color: #15803d;">+ R$ 81,89</span>
+        <span style="font-size: 12px; color: #6b6b6b;">entradas menos saída total</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; padding-top: 14px; border-top: 1px solid #efefef;">
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 13px; color: #6b6b6b;">Entradas</span><span style="font-size: 18px; font-weight: 600;">R$ 18.501,50</span></div>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 13px; color: #6b6b6b;">Saídas</span><span style="font-size: 18px; font-weight: 600;">R$ 12.643,47</span></div>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 13px; color: #6b6b6b;">Diário</span><span style="font-size: 18px; font-weight: 600;">R$ 5.776,14</span></div>
+        <div style="display: flex; flex-direction: column;"><span style="font-size: 13px; color: #6b6b6b;">Saída total</span><span style="font-size: 18px; font-weight: 600;">R$ 18.419,61</span></div>
+      </div>
+      <a href="Economia.dc.html" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 12px; background: #f5f5f5; text-decoration: none; color: #0a0a0a;">
+        <span style="display: flex; flex-direction: column;"><span style="font-size: 13px; color: #6b6b6b;">Guardado no mês</span><span style="font-weight: 700;">+ R$ 1.350,00</span></span>
+        <span style="font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px;">Economia<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6"></path></svg></span>
+      </a>
+      <span style="align-self: flex-start; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #ebebeb;">Dados de exemplo</span>
+    </section>
+  </main>
+
+  <nav aria-label="Navegação principal" style="height: 64px; flex: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: #ffffff; border-top: 1px solid #e5e5e5;">
+    <a href="Main.dc.html" class="tab on" aria-current="page"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg></span>Mês</a>
+    <a href="Ano.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="3.5" width="4.5" height="4.5" rx="1"></rect><rect x="3.5" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="9.75" width="4.5" height="4.5" rx="1"></rect><rect x="3.5" y="16" width="4.5" height="4.5" rx="1"></rect><rect x="9.75" y="16" width="4.5" height="4.5" rx="1"></rect><rect x="16" y="16" width="4.5" height="4.5" rx="1"></rect></svg></span>Ano</a>
+    <a href="Dia.dc.html" class="tab" style="color: #0a0a0a; font-weight: 600;"><span style="width: 52px; height: 52px; margin-top: -22px; border-radius: 999px; background: #0a0a0a; color: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 5px #ffffff;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Lançar</a>
+    <a href="Economia.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="13" rx="2.5"></rect><path d="M7 6.5V5a1.5 1.5 0 0 1 1.5-1.5h7A1.5 1.5 0 0 1 17 5v1.5"></path><circle cx="12" cy="13" r="2.5"></circle></svg></span>Economia</a>
+    <a href="Resumo.dc.html" class="tab"><span class="ind"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"></path></svg></span>Resumo</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1120}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var ent = {3:317,4:6450,8:7500,12:500,15:100,18:1000,19:934.5,21:1000,24:150,29:500,30:50};
+    var sai = {2:200,4:3025.7,8:7831.54,10:46.73,18:200,19:1339.5};
+    var dia = [0,12.29,437,100,799.5,640.58,336.29,134,94,17,275.06,583.57,356.74,122.9,10,0,159.9,11,467.18,107,119.49,0,84.7,150,214.75,238.2,142,100,62.99,0,0];
+    var saldo = 635.08, cells = [], i, d;
+    for (i = 0; i < 4; i++) cells.push({ d: '', sal: '', cls: 'cell blank', chipCls: 'chip', label: '' });
+    for (d = 1; d <= 31; d++) {
+      saldo += (ent[d] || 0) - (sai[d] || 0) - dia[d - 1];
+      var z = saldo < 0 ? 'z-neg' : saldo < 1000 ? 'z-red' : saldo < 2000 ? 'z-yel' : saldo < 4000 ? 'z-grn' : 'z-dgr';
+      cells.push({ d: String(d), sal: Math.round(saldo).toLocaleString('pt-BR'), cls: 'cell' + (d === 15 ? ' today' : ''), chipCls: 'chip ' + z,
+        label: d + ' de outubro, saldo R$ ' + saldo.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) });
+    }
+    return { cells: cells };
+  }
+}
+</script>
+</body>
+</html>

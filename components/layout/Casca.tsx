@@ -5,12 +5,17 @@ import { useRouter } from 'next/navigation'
 import { OcultarValoresProvider } from '@/components/dinheiro/Dinheiro'
 import { BarraAbas, MenuLateral } from './Navegacao'
 import { sair } from '@/lib/acesso/acoes'
+import { hojeEmSaoPaulo } from '@/lib/datas'
+import { mesDe } from '@/lib/calculo/calendario'
 
 export function Casca({ children }: { children: ReactNode }) {
   const router = useRouter()
   const [, iniciar] = useTransition()
-  // Etapa 3: o Lançar abre a folha do dia (celular) ou o painel do dia (web) em hoje.
-  const lancar = () => router.push('/mes')
+  // Lançar abre o dia de hoje: a folha no celular, o painel na web.
+  const lancar = () => {
+    const hoje = hojeEmSaoPaulo()
+    router.push(`/mes?m=${mesDe(hoje)}&dia=${hoje}`)
+  }
 
   return (
     <OcultarValoresProvider>

@@ -49,16 +49,19 @@ components/
   configuracao/  # Primeiro acesso, Ajustes, categorias
   formulario/    # campos (texto, senha, dinheiro), botões, segmentado, mensagens
   calendario/    # célula do dia, chip de saldo, mapa do ano
-  lancamento/    # folha/painel do dia, formulário
+  lancamento/    # painel do dia (folha no celular, painel na web), formulário, item da lista
+  mes/           # tela do Mês (TelaMes) e Dados gerais
   layout/        # casca logada, barras, cartão, Folha (Drawer no celular, Dialog na web)
 lib/
   acesso/        # esquemas Zod, Server Actions de login, regras de rota, exigirUsuario()
   configuracao/  # esquemas Zod, Server Actions e leitura de configurações e categorias
-  calculo/       # funções puras: saldo, faixas, performance, previsão, parcelas, recorrência
+  lancamentos/   # esquemas Zod, Server Actions (criar, editar, excluir) e carregarMes()
+  calculo/       # funções puras: saldo (calcularDias, totaisDoMes), calendário, faixas; depois previsão, parcelas, recorrência
   supabase/      # clientes server/browser/proxy, tipos gerados
   formato.ts     # reais (lerValor lê "1.000" como milhar), sem float
   datas.ts       # hojeEmSaoPaulo(), datas YYYY-MM-DD
   resultado.ts   # tipo de retorno das Server Actions
+  validacao.ts   # dinheiro(): campo de valor em texto → centavos (Zod)
 supabase/migrations/, supabase/templates/   # migrations e modelos de e-mail em português
 scripts/db-start.mjs  # sobe o Supabase e desliga o reinício automático dos contêineres
 proxy.ts         # o "middleware" do Next 16: renova a sessão e redireciona

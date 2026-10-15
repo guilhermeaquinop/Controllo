@@ -1,30 +1,9 @@
 // Esquemas Zod do Primeiro acesso e dos Ajustes. Os campos de dinheiro chegam como texto
 // ("1.234,56", "1.000") e saem em centavos inteiros. Os mesmos esquemas valem no navegador e no servidor.
 import { z } from 'zod'
-import { formatarLimite, lerValor } from '@/lib/formato'
+import { formatarLimite } from '@/lib/formato'
+import { dinheiro } from '@/lib/validacao'
 import { hojeEmSaoPaulo } from '@/lib/datas'
-
-/** R$ 1 bilhão: acima disso é erro de digitação. */
-const TETO_CENTAVOS = 100_000_000_000
-
-function dinheiro(mensagemVazio: string) {
-  return z.string().transform((texto, ctx) => {
-    if (!texto.trim()) {
-      ctx.addIssue({ code: 'custom', message: mensagemVazio })
-      return z.NEVER
-    }
-    const centavos = lerValor(texto)
-    if (centavos === null) {
-      ctx.addIssue({ code: 'custom', message: 'Digite um valor como 1.234,56.' })
-      return z.NEVER
-    }
-    if (Math.abs(centavos) > TETO_CENTAVOS) {
-      ctx.addIssue({ code: 'custom', message: 'Valor alto demais. Confira os dígitos.' })
-      return z.NEVER
-    }
-    return centavos
-  })
-}
 
 const limiteDeFaixa = dinheiro('Digite um valor.').refine(c => c > 0, { error: 'Use um valor maior que zero.' })
 

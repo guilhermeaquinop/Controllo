@@ -4,7 +4,7 @@
 import { createContext, useContext, useSyncExternalStore, type ReactNode } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { formatarComSinal, formatarReais } from '@/lib/formato'
+import { formatarComSinal, formatarNumero, formatarReais } from '@/lib/formato'
 
 const CHAVE = 'controllo:valores-ocultos'
 const Ctx = createContext<{ ocultos: boolean; alternar: () => void }>({ ocultos: false, alternar: () => {} })
@@ -49,14 +49,22 @@ type Props = {
   centavos: number
   /** "sinal": "+ R$ 10,00" / "− R$ 10,00", colorido verde/vermelho */
   modo?: 'simples' | 'sinal'
+  /** Com sinal, mas sem cor (ex.: "Guardado no mês", que não é entrada nem saída da conta). */
+  semCor?: boolean
   className?: string
 }
 
-export function Dinheiro({ centavos, modo = 'simples', className }: Props) {
+export function Dinheiro({ centavos, modo = 'simples', semCor, className }: Props) {
   const { ocultos } = useValoresOcultos()
-  const cor = modo === 'sinal' ? (centavos < 0 ? 'text-money-out' : 'text-money-in') : ''
+  const cor = modo === 'sinal' && !semCor ? (centavos < 0 ? 'text-money-out' : 'text-money-in') : ''
   if (ocultos) return <span className={cn(cor, className)} aria-label="valor oculto">R$ •••••</span>
   return <span className={cn(cor, 'whitespace-nowrap', className)}>{modo === 'sinal' ? formatarComSinal(centavos) : formatarReais(centavos)}</span>
+}
+
+/** Só o número ("6.450,00"), para resumos e células. Respeita o "Ocultar valores". */
+export function ValorNumero({ centavos, className }: { centavos: number; className?: string }) {
+  const { ocultos } = useValoresOcultos()
+  return <span className={cn('whitespace-nowrap', className)}>{ocultos ? '•••' : formatarNumero(centavos)}</span>
 }
 
 /** O botão de olho da barra superior. */

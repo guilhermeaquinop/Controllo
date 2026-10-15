@@ -2,7 +2,7 @@
 // Saldo inicial e faixas de cor, salvos juntos pelo botão "Salvar ajustes" (fim da tela, como no mockup).
 // As categorias ficam entre os cartões e o botão, mas fora do <form>: cada uma salva sozinha.
 import { useState, useTransition, type ReactNode } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
+import { Controller, useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { salvarAjustes } from '@/lib/configuracao/acoes'
 import { esquemaAjustes, type DadosAjustes } from '@/lib/configuracao/esquemas'
@@ -10,7 +10,7 @@ import { formatarLimite, formatarNumero, lerValor } from '@/lib/formato'
 import type { Limites } from '@/lib/calculo/faixa'
 import { cn } from '@/lib/utils'
 import { Cartao } from '@/components/layout/Cartao'
-import { AvisoFormulario, AvisoSalvo, BotaoPrincipal, CampoDinheiro, CampoTexto, MensagemCampo } from '@/components/formulario/Campos'
+import { AvisoFormulario, AvisoSalvo, BotaoPrincipal, CampoData, CampoDinheiro, MensagemCampo } from '@/components/formulario/Campos'
 
 const ID_FORM = 'form-ajustes'
 
@@ -62,9 +62,9 @@ export function FormAjustes({ saldoInicial, saldoInicialData, limites, hoje, ent
           titulo="Saldo inicial"
           descricao="Quanto havia na conta no começo do dia escolhido. Daí em diante o saldo passa de um dia para o outro e de um mês para o outro."
         >
-          <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-3">
+          <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] gap-3">
             <CampoDinheiro rotulo="Valor" erro={errors.saldo?.message} {...register('saldo')} />
-            <CampoTexto rotulo="No dia" type="date" max={hoje} erro={errors.data?.message} {...register('data')} />
+            <Controller control={control} name="data" render={({ field }) => <CampoData rotulo="No dia" max={hoje} erro={errors.data?.message} {...field} />} />
           </div>
         </Cartao>
 

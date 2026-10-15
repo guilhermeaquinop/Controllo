@@ -19,17 +19,20 @@ type Props = {
   dia: Dia
   limites: Limites
   selecionado?: boolean
+  /** Para leitores de tela: "4 de outubro, saldo R$ 3.627,09". */
+  rotulo?: string
   onSelecionar: (data: string) => void
 }
 
 /** Célula do calendário. No celular mostra só o chip; a partir de lg mostra os movimentos do dia. */
-export function CelulaDia({ dia, limites, selecionado, onSelecionar }: Props) {
+export function CelulaDia({ dia, limites, selecionado, rotulo, onSelecionar }: Props) {
   return (
     <button
       type="button"
       onClick={() => onSelecionar(dia.data)}
       aria-pressed={selecionado}
-      aria-label={`Dia ${dia.numero}`}
+      aria-label={rotulo ?? `Dia ${dia.numero}`}
+      aria-current={dia.hoje ? 'date' : undefined}
       className={cn(
         'flex min-w-0 flex-col justify-between rounded-md text-left text-ink',
         'h-14 border border-transparent p-[5px_3px_4px] hover:border-border-control',

@@ -2,10 +2,11 @@
 // Campos, botões e mensagens de formulário, usados em todo o app.
 // Medidas: padrão = 48px e cantos de 10px (Ajustes, folha do dia);
 // grande = 52px no celular e 48px na web, cantos de 12px (telas de acesso).
-import { useId, useState, type ComponentProps, type FocusEvent, type ReactNode } from 'react'
-import { Check, CircleAlert, Eye, EyeOff, LoaderCircle } from 'lucide-react'
+import { useId, useRef, useState, type ComponentProps, type FocusEvent, type ReactNode, type Ref } from 'react'
+import { CalendarDays, Check, CircleAlert, Eye, EyeOff, LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { formatarNumero, lerValor } from '@/lib/formato'
+import { formatarData, lerData, mascararData } from '@/lib/datas'
 
 // 16px no celular: abaixo disso o Safari do iPhone dá zoom ao tocar no campo.
 const TEXTO_CAMPO = 'text-base text-ink placeholder:text-ink-muted lg:text-body'
@@ -16,8 +17,6 @@ const MOLDURA = {
 const BORDA = 'border border-border-control bg-surface'
 const BORDA_ERRO = 'border-primary ring-1 ring-primary'
 // Moldura com o input dentro (senha, dinheiro): o contorno de foco vai na moldura.
-// Data: no celular o toque já abre o seletor nativo; o ícone do Chrome só tomaria espaço.
-const DATA = 'max-lg:[&::-webkit-calendar-picker-indicator]:hidden'
 const FOCO_DENTRO = 'has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-primary'
 
 type PropsCampo = ComponentProps<'input'> & {
@@ -46,7 +45,7 @@ export function CampoTexto({ rotulo, erro, dica, grande, id, className, ...props
       <input
         id={ids.campo}
         {...descricao(ids, erro, dica)}
-        className={cn('w-full px-3.5', BORDA, MOLDURA[grande ? 'grande' : 'padrao'], TEXTO_CAMPO, props.type === 'date' && DATA, erro && BORDA_ERRO, className)}
+        className={cn('w-full px-3.5', BORDA, MOLDURA[grande ? 'grande' : 'padrao'], TEXTO_CAMPO, erro && BORDA_ERRO, className)}
         {...props}
       />
       <MensagemCampo id={ids.ajuda} erro={erro} dica={dica} />
@@ -110,6 +109,115 @@ export function CampoDinheiro({ rotulo, erro, dica, grande, id, className, onBlu
           {...props}
         />
       </span>
+      <MensagemCampo id={ids.ajuda} erro={erro} dica={dica} />
+    </div>
+  )
+}
+
+/**
+ * Data sempre em dd/mm/aaaa. O <input type="date"> nativo mostra a data no idioma do navegador
+ * (num Chrome em inglês, "10/15/2026"), então a pessoa digita num campo de texto com máscara e o
+ * botão de calendário abre o seletor nativo. O valor que entra e sai é 'YYYY-MM-DD'.
+ * Controlado: use com o <Controller> do React Hook Form.
+ */
+export function CampoData({ rotulo, erro, dica, grande, value, onChange, onBlur, name, min, max, ref }: {
+  rotulo: string
+  erro?: string
+  dica?: string
+  grande?: boolean
+  value: string
+  onChange: (valor: string) => void
+  onBlur?: () => void
+  name?: string
+  min?: string
+  max?: string
+  ref?: Ref<HTMLInputElement>
+}) {
+  const ids = useIds()
+  const seletor = useRef<HTMLInputElement>(null)
+  const [texto, setTexto] = useState(value ? formatarData(value) : '')
+  // Valor mudou por fora (calendário, reset do formulário): atualiza o texto durante a renderização.
+  const [valorAnterior, setValorAnterior] = useState(value)
+  if (value !== valorAnterior) {
+    setValorAnterior(value)
+    if (value && value !== lerData(texto)) setTexto(formatarData(value))
+  }
+
+  const abrirCalendario = () => {
+    try {
+      seletor.current?.showPicker()
+    } catch {
+      // Navegador sem showPicker: a pessoa digita a data.
+    }
+  }
+
+  return (
+    <div className="flex min-w-0 flex-col gap-1.5">
+      <label htmlFor={ids.campo} className="text-label">{rotulo}</label>
+      <span className={cn('relative flex items-center pr-0.5 pl-3 lg:pl-3.5', BORDA, MOLDURA[grande ? 'grande' : 'padrao'], FOCO_DENTRO, erro && BORDA_ERRO)}>
+        <input
+          ref={ref}
+          id={ids.campo}
+          name={name}
+          inputMode="numeric"
+          autoComplete="off"
+          placeholder="dd/mm/aaaa"
+          maxLength={10}
+          value={texto}
+          onChange={e => {
+            const novo = mascararData(e.target.value)
+            setTexto(novo)
+            onChange(lerData(novo) ?? '') // incompleta ou inexistente: o esquema mostra o erro
+          }}
+          onBlur={onBlur}
+          {...descricao(ids, erro, dica)}
+          className={cn('h-full min-w-0 flex-1 bg-transparent outline-none', TEXTO_CAMPO)}
+        />
+        <button
+          type="button"
+          onClick={abrirCalendario}
+          aria-label="Abrir calendário"
+          className="grid size-control shrink-0 place-items-center rounded-md text-ink hover:bg-surface-sunken"
+        >
+          <CalendarDays size={18} strokeWidth={1.7} />
+        </button>
+        {/* Só para abrir o seletor nativo; invisível e fora da ordem de tabulação. */}
+        <input
+          ref={seletor}
+          type="date"
+          tabIndex={-1}
+          aria-hidden
+          value={value}
+          min={min}
+          max={max}
+          onChange={e => onChange(e.target.value)}
+          className="pointer-events-none absolute bottom-0 left-0 size-px opacity-0"
+        />
+      </span>
+      <MensagemCampo id={ids.ajuda} erro={erro} dica={dica} />
+    </div>
+  )
+}
+
+/** Lista de opções (select nativo: no celular abre o seletor do sistema). */
+export function CampoSelecao({ rotulo, erro, dica, id, className, children, ...props }: Omit<ComponentProps<'select'>, 'children'> & {
+  rotulo: string
+  erro?: string
+  dica?: string
+  children: ReactNode
+}) {
+  const ids = useIds(id)
+  return (
+    <div className="flex min-w-0 flex-col gap-1.5">
+      <label htmlFor={ids.campo} className="text-label">{rotulo}</label>
+      <select
+        id={ids.campo}
+        {...descricao(ids, erro, dica)}
+        className={cn('w-full min-w-0 px-2.5', BORDA, MOLDURA.padrao, TEXTO_CAMPO, erro && BORDA_ERRO, className)}
+        {...props}
+      >
+        {children}
+      </select>
       <MensagemCampo id={ids.ajuda} erro={erro} dica={dica} />
     </div>
   )

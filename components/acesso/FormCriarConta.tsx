@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { criarConta } from '@/lib/acesso/acoes'
 import { esquemaCriarConta } from '@/lib/acesso/esquemas'
-import { AvisoFormulario, BotaoPrincipal, CampoSenha, CampoTexto } from './Campos'
+import { AvisoFormulario, BotaoPrincipal, CampoSenha, CampoTexto } from '@/components/formulario/Campos'
 import { EmailEnviado } from './EmailEnviado'
 import { LinkAcesso } from './Moldura'
 
@@ -37,8 +37,8 @@ export function FormCriarConta() {
   return (
     <form onSubmit={enviar} noValidate aria-label="Criar conta" className="flex flex-col gap-4 lg:gap-[18px]">
       <AvisoFormulario>{errors.root?.servidor?.message}</AvisoFormulario>
-      <CampoTexto rotulo="Nome" autoComplete="name" autoCapitalize="words" erro={errors.nome?.message} {...register('nome')} />
-      <CampoTexto
+      <CampoTexto grande rotulo="Nome" autoComplete="name" autoCapitalize="words" erro={errors.nome?.message} {...register('nome')} />
+      <CampoTexto grande
         rotulo="E-mail"
         type="email"
         autoComplete="email"
@@ -48,14 +48,14 @@ export function FormCriarConta() {
         erro={errors.email?.message}
         {...register('email')}
       />
-      <CampoSenha
+      <CampoSenha grande
         rotulo="Senha"
         autoComplete="new-password"
         dica="Pelo menos 8 caracteres."
         erro={errors.senha?.message}
         {...register('senha')}
       />
-      <BotaoPrincipal pendente={pendente} className="mt-2">{pendente ? 'Criando conta' : 'Criar conta'}</BotaoPrincipal>
+      <BotaoPrincipal pendente={pendente} className="mt-2 lg:h-12">{pendente ? 'Criando conta' : 'Criar conta'}</BotaoPrincipal>
     </form>
   )
 }

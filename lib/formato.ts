@@ -26,11 +26,42 @@ export function formatarCurto(centavos: number): string {
   return (centavos < 0 ? MENOS : '') + inteiro.format(Math.round(Math.abs(centavos) / 100))
 }
 
-/** Converte o que a pessoa digitou ("1.234,56", "1234,5", "50") em centavos. */
+/** Limite de faixa: "1.000" quando é redondo, "1.000,50" quando tem centavos. */
+export function formatarLimite(centavos: number): string {
+  return centavos % 100 === 0 ? formatarCurto(centavos) : formatarNumero(centavos)
+}
+
+/**
+ * Converte o que a pessoa digitou em centavos, sem passar por float.
+ * Aceita "1.234,56", "1234,5", "50", "R$ 635,08", "−300,00" e "1.000" (milhar, como no Brasil).
+ * Sem vírgula, o ponto só vira decimal quando não forma grupos de milhar: "10.50" = R$ 10,50.
+ * Mais de 2 casas decimais ou texto sem número devolve null.
+ */
 export function lerValor(texto: string): number | null {
-  const limpo = texto.replace(/[^\d,.-]/g, '')
-  if (!limpo) return null
-  const normal = limpo.includes(',') ? limpo.replace(/\./g, '').replace(',', '.') : limpo
-  const n = Number(normal)
-  return Number.isFinite(n) ? Math.round(n * 100) : null
+  const limpo = texto.replace(/[−–]/g, '-').replace(/[^\d,.-]/g, '')
+  if (!/\d/.test(limpo) || limpo.lastIndexOf('-') > 0) return null
+  const negativo = limpo.startsWith('-')
+  const corpo = limpo.replace('-', '')
+
+  let inteiro: string
+  let fracao: string
+  if (corpo.includes(',')) {
+    const partes = corpo.split(',')
+    if (partes.length > 2) return null
+    inteiro = partes[0].replace(/\./g, '')
+    fracao = partes[1]
+  } else if (/^\d{1,3}(\.\d{3})+$/.test(corpo)) {
+    inteiro = corpo.replace(/\./g, '')
+    fracao = ''
+  } else {
+    const partes = corpo.split('.')
+    if (partes.length > 2) return null
+    inteiro = partes[0]
+    fracao = partes[1] ?? ''
+  }
+
+  if (!/^\d*$/.test(inteiro) || !/^\d{0,2}$/.test(fracao)) return null
+  const centavos = Number(inteiro || '0') * 100 + Number(fracao.padEnd(2, '0'))
+  if (!Number.isSafeInteger(centavos)) return null
+  return negativo && centavos !== 0 ? -centavos : centavos
 }

@@ -10,13 +10,11 @@ import {
   esquemaEntrar,
   esquemaNovaSenha,
   esquemaRecuperarSenha,
-  type Resultado,
 } from './esquemas'
+import { DADOS_INVALIDOS, type Resultado } from '@/lib/resultado'
 import { mensagemDeErroAuth } from './mensagens'
 import { ROTA_ENTRAR, ROTA_INICIAL } from './rotas'
 import { urlDoSite } from './usuario'
-
-const DADOS_INVALIDOS: Resultado = { ok: false, erro: 'Confira os campos e tente de novo.' }
 
 export async function entrar(entrada: unknown): Promise<Resultado> {
   const dados = esquemaEntrar.safeParse(entrada)

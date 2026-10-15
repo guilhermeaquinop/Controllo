@@ -39,22 +39,28 @@ npm run db:types         # regera lib/supabase/database.types.ts
 ```
 app/
   (auth)/entrar, criar-conta, recuperar-senha, nova-senha
-  (app)/mes, ano, economia, resumo, ajustes      # telas logadas
-  (app)/primeiro-acesso
+  (app)/(principal)/mes, ano, economia, resumo, ajustes   # telas com menu; exigem configuração
+  (app)/primeiro-acesso                           # sem menu; cria configuração e categorias
   auth/confirmar/route.ts                         # retorno dos links de e-mail (token_hash ou code)
   api/cron/recorrencias/route.ts                  # Vercel Cron, protegido por CRON_SECRET
 components/
   ui/            # shadcn/ui
-  acesso/        # campos e formulários das telas de acesso
+  acesso/        # moldura e formulários das telas de acesso
+  configuracao/  # Primeiro acesso, Ajustes, categorias
+  formulario/    # campos (texto, senha, dinheiro), botões, segmentado, mensagens
   calendario/    # célula do dia, chip de saldo, mapa do ano
   lancamento/    # folha/painel do dia, formulário
-  layout/        # casca logada, barra de abas (celular), menu lateral (web), barra superior
+  layout/        # casca logada, barras, cartão, Folha (Drawer no celular, Dialog na web)
 lib/
   acesso/        # esquemas Zod, Server Actions de login, regras de rota, exigirUsuario()
+  configuracao/  # esquemas Zod, Server Actions e leitura de configurações e categorias
   calculo/       # funções puras: saldo, faixas, performance, previsão, parcelas, recorrência
   supabase/      # clientes server/browser/proxy, tipos gerados
-  formato.ts     # reais, datas pt-BR
+  formato.ts     # reais (lerValor lê "1.000" como milhar), sem float
+  datas.ts       # hojeEmSaoPaulo(), datas YYYY-MM-DD
+  resultado.ts   # tipo de retorno das Server Actions
 supabase/migrations/, supabase/templates/   # migrations e modelos de e-mail em português
+scripts/db-start.mjs  # sobe o Supabase e desliga o reinício automático dos contêineres
 proxy.ts         # o "middleware" do Next 16: renova a sessão e redireciona
 ```
 

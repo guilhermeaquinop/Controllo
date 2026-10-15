@@ -32,6 +32,3 @@ export type DadosEntrar = z.input<typeof esquemaEntrar>
 export type DadosCriarConta = z.input<typeof esquemaCriarConta>
 export type DadosRecuperarSenha = z.input<typeof esquemaRecuperarSenha>
 export type DadosNovaSenha = z.input<typeof esquemaNovaSenha>
-
-/** O que toda Server Action de acesso devolve quando não redireciona. */
-export type Resultado = { ok: true } | { ok: false; erro: string }

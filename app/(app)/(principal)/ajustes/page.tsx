@@ -1,22 +1,32 @@
 import type { Metadata } from 'next'
 import { LogOut } from 'lucide-react'
 import { BarraSuperior, CabecalhoPagina, Conteudo } from '@/components/layout/BarraSuperior'
-import { EmBreve } from '@/components/layout/EmBreve'
+import { Cartao } from '@/components/layout/Cartao'
+import { FormAjustes } from '@/components/configuracao/FormAjustes'
+import { CartaoCategorias } from '@/components/configuracao/CartaoCategorias'
 import { sair } from '@/lib/acesso/acoes'
 import { exigirUsuario } from '@/lib/acesso/usuario'
+import { exigirConfiguracao, listarCategorias } from '@/lib/configuracao/dados'
+import { hojeEmSaoPaulo } from '@/lib/datas'
 
 export const metadata: Metadata = { title: 'Ajustes' }
 
 export default async function PaginaAjustes() {
-  const usuario = await exigirUsuario()
+  const [usuario, configuracao, categorias] = await Promise.all([exigirUsuario(), exigirConfiguracao(), listarCategorias()])
   return (
     <>
       <BarraSuperior titulo="Ajustes" voltarPara="/mes" />
-      <Conteudo className="lg:max-w-[720px]">
+      <Conteudo className="w-full lg:max-w-[720px]">
         <CabecalhoPagina titulo="Ajustes" />
-        <EmBreve etapa={2}>Saldo inicial, faixas de cor e categorias chegam aqui.</EmBreve>
-        <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-5">
-          <h2 className="text-section">Conta</h2>
+        <FormAjustes
+          saldoInicial={configuracao.saldoInicial}
+          saldoInicialData={configuracao.saldoInicialData}
+          limites={configuracao.limites}
+          hoje={hojeEmSaoPaulo()}
+          entre={<CartaoCategorias categorias={categorias} />}
+        />
+        {/* Etapa 7: reservas. Etapa 8: perfil, senha, exportar CSV e excluir conta. */}
+        <Cartao titulo="Conta" className="gap-3">
           <p className="text-ink-muted">{usuario.email}</p>
           {/* Server Action direto no form: funciona até sem JavaScript. */}
           <form action={sair}>
@@ -27,7 +37,7 @@ export default async function PaginaAjustes() {
               <LogOut size={16} strokeWidth={1.7} /> Sair
             </button>
           </form>
-        </section>
+        </Cartao>
       </Conteudo>
     </>
   )

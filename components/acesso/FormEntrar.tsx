@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { entrar } from '@/lib/acesso/acoes'
 import { esquemaEntrar } from '@/lib/acesso/esquemas'
-import { AvisoFormulario, BotaoPrincipal, CampoSenha, CampoTexto } from './Campos'
+import { AvisoFormulario, BotaoPrincipal, CampoSenha, CampoTexto } from '@/components/formulario/Campos'
 import { LinkAcesso } from './Moldura'
 
 export function FormEntrar({ erroInicial }: { erroInicial?: string }) {
@@ -26,7 +26,7 @@ export function FormEntrar({ erroInicial }: { erroInicial?: string }) {
   return (
     <form onSubmit={enviar} noValidate aria-label="Entrar" className="flex flex-col gap-4 lg:gap-[18px]">
       <AvisoFormulario>{errors.root?.servidor?.message ?? (mostrarErroInicial ? erroInicial : undefined)}</AvisoFormulario>
-      <CampoTexto
+      <CampoTexto grande
         rotulo="E-mail"
         type="email"
         autoComplete="email"
@@ -36,7 +36,7 @@ export function FormEntrar({ erroInicial }: { erroInicial?: string }) {
         erro={errors.email?.message}
         {...register('email')}
       />
-      <CampoSenha rotulo="Senha" autoComplete="current-password" erro={errors.senha?.message} {...register('senha')} />
+      <CampoSenha grande rotulo="Senha" autoComplete="current-password" erro={errors.senha?.message} {...register('senha')} />
 
       <div className="flex flex-wrap items-center justify-end gap-3 lg:justify-between">
         {/* No celular fica sempre marcado (o mockup não mostra a opção). */}
@@ -47,7 +47,7 @@ export function FormEntrar({ erroInicial }: { erroInicial?: string }) {
         <LinkAcesso href="/recuperar-senha" className="flex min-h-8 items-center text-label">Esqueci minha senha</LinkAcesso>
       </div>
 
-      <BotaoPrincipal pendente={pendente}>{pendente ? 'Entrando' : 'Entrar'}</BotaoPrincipal>
+      <BotaoPrincipal pendente={pendente} className="lg:h-12">{pendente ? 'Entrando' : 'Entrar'}</BotaoPrincipal>
     </form>
   )
 }

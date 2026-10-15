@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { recuperarSenha } from '@/lib/acesso/acoes'
 import { esquemaRecuperarSenha } from '@/lib/acesso/esquemas'
-import { AvisoFormulario, BotaoPrincipal, CampoTexto } from './Campos'
+import { AvisoFormulario, BotaoPrincipal, CampoTexto } from '@/components/formulario/Campos'
 import { EmailEnviado } from './EmailEnviado'
 
 export function FormRecuperarSenha() {
@@ -35,7 +35,7 @@ export function FormRecuperarSenha() {
   return (
     <form onSubmit={enviar} noValidate aria-label="Recuperar senha" className="flex flex-col gap-4 lg:gap-[18px]">
       <AvisoFormulario>{errors.root?.servidor?.message}</AvisoFormulario>
-      <CampoTexto
+      <CampoTexto grande
         rotulo="E-mail"
         type="email"
         autoComplete="email"
@@ -45,7 +45,7 @@ export function FormRecuperarSenha() {
         erro={errors.email?.message}
         {...register('email')}
       />
-      <BotaoPrincipal pendente={pendente} className="mt-2">{pendente ? 'Enviando' : 'Enviar link'}</BotaoPrincipal>
+      <BotaoPrincipal pendente={pendente} className="mt-2 lg:h-12">{pendente ? 'Enviando' : 'Enviar link'}</BotaoPrincipal>
     </form>
   )
 }
